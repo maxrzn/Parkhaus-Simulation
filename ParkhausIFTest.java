@@ -31,10 +31,19 @@ public class ParkhausIFTest {
 
     @Test
     @DisplayName("Es wird richtig angezeigt ob ein Auto bezahlt hat")
-    void bezahlttest(){
+    void statusttest(){
         Auto a1 = p1.pull();
         assertFalse(a1.getStatus());
         p1.pay(a1);
         assertTrue(a1.getStatus());
+    }
+
+    @Test
+    @DisplayName("Auto nur rauslassen wenn es bazahlt hat")
+    void bezahlttest(){
+        Auto a1 = p1.pull();
+        assertEquals("Bitte Ticket bezahlen!",p1.push(a1));
+        p1.pay(a1);
+        assertEquals("Gute Fahrt",p1.push(a1));
     }
 }

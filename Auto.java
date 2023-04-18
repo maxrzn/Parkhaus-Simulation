@@ -9,8 +9,11 @@ public class Auto {
         counter++;
     }
     public int getId() {return this.id;}
-    public void paid(){this.paid = true;}
+    public void paid(){
+        System.out.print("bezahlt");
+        this.paid = true;}
     public static int getCounter() {return counter;}
     public boolean getStatus(){return this.paid;}
+
 }
 
