@@ -15,7 +15,7 @@ public class Parkhaus implements ParkhausIF {
 
     @Override
     public String push(Auto a1){
-       if(a1.getStatus()) {
+       if(a1.getStatus()==true) {
            return "Gute Fahrt";
        } else {
            return "Bitte Ticket bezahlen!";

@@ -1,7 +1,7 @@
 public class Auto {
     private int id;
     private int Zeit;
-    private boolean paid = false;
+    private boolean paid1 = false;
     private static int counter = 0;
 
     public Auto(int id, int zeit) {
@@ -10,10 +10,10 @@ public class Auto {
     }
     public int getId() {return this.id;}
     public void paid(){
-        System.out.print("bezahlt");
-        this.paid = true;}
+        this.paid1 = true;
+    }
     public static int getCounter() {return counter;}
-    public boolean getStatus(){return this.paid;}
+    public boolean getStatus(){return this.paid1;}
 
 }
 
