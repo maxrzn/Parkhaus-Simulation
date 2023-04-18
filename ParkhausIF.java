@@ -1,4 +1,4 @@
 public interface ParkhausIF {
-    Parkhaus.Auto pull();
-    String push(Parkhaus.Auto a1);
+    Auto pull();
+    String push(Auto a1);
 }
