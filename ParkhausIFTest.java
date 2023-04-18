@@ -20,6 +20,12 @@ public class ParkhausIFTest {
     @Test
     @DisplayName("Auto wird beim ziehen des parktickets zurückgegeben")
     void pulltest(){
-        assertEquals(p1.pull().getClass(), Auto.class);
+        assertEquals(Auto.class, p1.pull().getClass());
+    }
+
+    @Test
+    @DisplayName("Auto wird rausgelassen")
+    void pushtest(){
+        assertEquals("Gute Fahrt", p1.push(p1.pull()));
     }
 }
