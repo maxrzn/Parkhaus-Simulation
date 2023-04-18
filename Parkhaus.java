@@ -18,4 +18,8 @@ public class Parkhaus implements ParkhausIF {
         return "Gute Fahrt";
     }
 
+    public void pay(Auto a1) {
+       a1.paid();
+    }
+
 }

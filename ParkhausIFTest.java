@@ -34,7 +34,7 @@ public class ParkhausIFTest {
     @DisplayName("Es wird richtig angezeigt ob ein Auto bezahlt hat")
     void bezahlttest(){
         Auto a1 = p1.pull();
-        a1.pay();
-        assertTrue(p1.getStatus());
+        p1.pay(a1);
+        assertTrue(a1.getStatus());
     }
 }
