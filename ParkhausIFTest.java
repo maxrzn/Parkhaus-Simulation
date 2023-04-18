@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ParkhausIFTest {
     Parkhaus p1;
@@ -27,5 +28,13 @@ public class ParkhausIFTest {
     @DisplayName("Auto wird rausgelassen")
     void pushtest(){
         assertEquals("Gute Fahrt", p1.push(p1.pull()));
+    }
+
+    @Test
+    @DisplayName("Es wird richtig angezeigt ob ein Auto bezahlt hat")
+    void bezahlttest(){
+        Auto a1 = p1.pull();
+        a1.pay();
+        assertTrue(p1.getStatus());
     }
 }
