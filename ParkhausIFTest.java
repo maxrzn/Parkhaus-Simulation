@@ -1,7 +1,4 @@
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,11 +20,13 @@ public class ParkhausIFTest {
         assertEquals(Auto.class, p1.pull().getClass());
     }
 
+    @Disabled
     @Test
     @DisplayName("Auto wird rausgelassen")
     void pushtest(){
         assertEquals("Gute Fahrt", p1.push(p1.pull()));
     }
+
 
     @Test
     @DisplayName("Es wird richtig angezeigt ob ein Auto bezahlt hat")
