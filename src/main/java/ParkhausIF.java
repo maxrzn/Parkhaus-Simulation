@@ -1,4 +1,4 @@
-package src.java;
+package src.main.java;
 
 public interface ParkhausIF {
     Auto pull();

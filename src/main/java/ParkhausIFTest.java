@@ -1,7 +1,6 @@
-package src.java;
+package src.main.java;
 
 import org.junit.jupiter.api.*;
-import src.java.Parkhaus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,21 +17,21 @@ public class ParkhausIFTest {
     }
 
     @Test
-    @DisplayName("src.java.Auto wird beim ziehen des parktickets zurückgegeben")
+    @DisplayName("src.main.java.Auto wird beim ziehen des parktickets zurückgegeben")
     void pulltest(){
         assertEquals(Auto.class, p1.pull().getClass());
     }
 
     @Disabled
     @Test
-    @DisplayName("src.java.Auto wird rausgelassen")
+    @DisplayName("src.main.java.Auto wird rausgelassen")
     void pushtest(){
         assertEquals("Gute Fahrt", p1.push(p1.pull()));
     }
 
 
     @Test
-    @DisplayName("Es wird richtig angezeigt ob ein src.java.Auto bezahlt hat")
+    @DisplayName("Es wird richtig angezeigt ob ein src.main.java.Auto bezahlt hat")
     void statusttest(){
         Auto a1 = p1.pull();
         Assertions.assertFalse(a1.getStatus());
@@ -41,7 +40,7 @@ public class ParkhausIFTest {
     }
 
     @Test
-    @DisplayName("src.java.Auto nur rauslassen wenn es bazahlt hat")
+    @DisplayName("src.main.java.Auto nur rauslassen wenn es bazahlt hat")
     void bezahlttest(){
         Auto a1 = p1.pull();
         assertEquals("Bitte Ticket bezahlen!",p1.push(a1));
