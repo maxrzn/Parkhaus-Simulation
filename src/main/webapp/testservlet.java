@@ -32,6 +32,7 @@ public class testservlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
         if(urlparamfound && request.getQueryString().split("=")[0].equals("name")){
+            this.message = "Hallo "+this.param;
             out.println("<h1>" + "Hello" + " " + this.param + "</h1>");
         } else {
             out.println("<h1>"+this.message+"</h1>");
