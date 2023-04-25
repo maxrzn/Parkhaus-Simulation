@@ -2,16 +2,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Parkhaus</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
-<br/>
-<h1>my servlet:
-    <a href="test">Test Servlet</a>
-</h1>
+<h1>Parkhaus Dashboard </h1>
+<ul>
+    <li>Kapazität  : </li>
+    <li>Freie Plätze : </li>
+    <li>Aktive Tickets : </li>
+    <li>Verbuchte Tickets : </li>
+</ul>
 </body>
 </html>
