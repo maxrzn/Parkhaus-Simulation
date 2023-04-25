@@ -1,6 +1,8 @@
-package src.main.java;
+package src.test;
 
 import org.junit.jupiter.api.*;
+import src.main.java.Auto;
+import src.main.java.Parkhaus;
 
 import static org.junit.jupiter.api.Assertions.*;
 
