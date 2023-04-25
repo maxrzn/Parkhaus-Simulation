@@ -1,3 +1,5 @@
+package src.java;
+
 public class Parkhaus implements ParkhausIF {
 
     private int aktuellezeit = 0;
@@ -6,7 +8,7 @@ public class Parkhaus implements ParkhausIF {
     /**
      * pull()
      * erstellt ein auto(id,zeit)
-     * @return Auto: gibt Auto zurück, dass reingefahren ist
+     * @return src.java.Auto: gibt src.java.Auto zurück, dass reingefahren ist
      */
    @Override
     public Auto pull() {

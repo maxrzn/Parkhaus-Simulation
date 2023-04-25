@@ -1,3 +1,5 @@
+package src.java;
+
 public class Auto {
     private int id;
     private int Zeit;
