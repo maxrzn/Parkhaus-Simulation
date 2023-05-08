@@ -1,4 +1,4 @@
-package java1;
+
 public class Parkhaus implements ParkhausIF {
 
     private int aktuellezeit = 0;

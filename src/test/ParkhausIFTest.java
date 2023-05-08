@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.*;
 
-import java1.Auto;
-import java1.Parkhaus;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ParkhausIFTest {
