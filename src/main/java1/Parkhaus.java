@@ -1,3 +1,4 @@
+package java1;
 
 public class Parkhaus implements ParkhausIF {
 
