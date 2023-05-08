@@ -1,3 +1,4 @@
+package java1;
 public class Auto {
     private int id;
     private int Zeit;

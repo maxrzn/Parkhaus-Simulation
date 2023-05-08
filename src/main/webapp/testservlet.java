@@ -1,4 +1,4 @@
-package src.main.webapp;
+package webapp;
 
 import java.io.*;
 import javax.servlet.Servlet;
