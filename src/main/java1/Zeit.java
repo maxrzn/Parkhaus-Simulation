@@ -3,7 +3,7 @@ package java1;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Zeit {
+public class Zeit implements Comparable<Zeit> {
     private int tag;
     private int monat;
     private int jahr;
@@ -13,7 +13,7 @@ public class Zeit {
     /**
      * initiiert Zeit mit "1.6.2023, 0:0"
      */
-    public Zeit(){
+    public Zeit() {
         this.tag = 1;
         this.monat = 6;
         this.jahr = 2023;
@@ -24,14 +24,15 @@ public class Zeit {
 
 
     /**
-     *setTime u.a. im Format "DD.MM.YYYY, ss:mm"
+     * setTime u.a. im Format "DD.MM.YYYY, ss:mm"
+     *
      * @param input
      */
-    public void setTime(String input) throws NumberFormatException{
+    public void setTime(String input) throws NumberFormatException {
         String reg = "^([0-2]?[0-9]|3[0-1])[.]([0]?[0-9]|1[0-2])[.]([0-9][0-9][0-9][1-9]), ([0-1]?[0-9]|2[0-3])[:]([0-5]?[0-9])$";
-        if(input.matches(reg)) {
+        if (input.matches(reg)) {
             Matcher m = Pattern.compile(reg).matcher(input);
-            if(m.find()){
+            if (m.find()) {
                 this.tag = Integer.parseInt(m.group(1));
                 this.monat = Integer.parseInt(m.group(2));
                 this.jahr = Integer.parseInt(m.group(3));
@@ -42,21 +43,22 @@ public class Zeit {
             throw new NumberFormatException("Raum-Zeit-Kontinuum verletzt");
         }
     }
-    public void addTime(int stunde, int minute){
-        this.stunde = (this.stunde + stunde + (this.minute+minute)/60) % 24;
-        this.minute = (this.minute+minute)%60;
-        tag += (this.stunde + stunde)/24;
-        if(tag > tageInMonat(jahr, monat)){
+
+    public void addTime(int stunde, int minute) {
+        this.stunde = (this.stunde + stunde + (this.minute + minute) / 60) % 24;
+        this.minute = (this.minute + minute) % 60;
+        tag += (this.stunde + stunde) / 24;
+        if (tag > tageInMonat(jahr, monat)) {
             tag = tag - tageInMonat(jahr, monat);
-            monat ++;
+            monat++;
         }
-        if(monat > 12){
+        if (monat > 12) {
             monat = monat - 12;
-            jahr ++;
+            jahr++;
         }
     }
 
-    private static int tageInMonat(int jahr, int monat){
+    private static int tageInMonat(int jahr, int monat) {
         if (istSchaltjahr(jahr) == true && monat == 2) { //bei einem Schaltjahr hat der Februar 29 statt 28 tage
             return 29;
         }
@@ -65,23 +67,32 @@ public class Zeit {
         }
         int tage = 30; //bei monat 4 6 und 9 blibt es bei 30 tagen
         switch (monat) {
-            case 2: tage = 28; break;
-            case 4: break;
-            case 6: break;
-            case 9: break;
-            case 11: tage = 30; break;
-            default : tage = 31; break; // alle nicht angegebenen Monate haben 31 Tage
+            case 2:
+                tage = 28;
+                break;
+            case 4:
+                break;
+            case 6:
+                break;
+            case 9:
+                break;
+            case 11:
+                tage = 30;
+                break;
+            default:
+                tage = 31;
+                break; // alle nicht angegebenen Monate haben 31 Tage
         }
         return tage;
     }
+
     private static boolean istSchaltjahr(int jahr) throws IllegalArgumentException {
         if (jahr < 0) {
             throw new IllegalArgumentException("ungueltiger Wert fuer Jahr:" + jahr);
         }
         if (jahr < 1583 && jahr % 4 == 0) {
             return true;
-        }
-        else if (jahr%4 == 0 && (jahr%100 != 0 || jahr%400 == 0)) {
+        } else if (jahr % 4 == 0 && (jahr % 100 != 0 || jahr % 400 == 0)) {
             return true;
         } else {
             return false;
@@ -89,35 +100,70 @@ public class Zeit {
     }
 
 
-    public int getStunde(){return this.stunde;}
-    public int getMinute(){return this.minute;}
-    public int getTag(){return this.tag;}
-    public int getMonat(){return this.monat;}
-    public int getJahr(){return this.jahr;}
+    public int getStunde() {
+        return this.stunde;
+    }
+
+    public int getMinute() {
+        return this.minute;
+    }
+
+    public int getTag() {
+        return this.tag;
+    }
+
+    public int getMonat() {
+        return this.monat;
+    }
+
+    public int getJahr() {
+        return this.jahr;
+    }
 
 
     /**
-     *
      * toString im Format "DD.MM.YYYY, ss:mm"
+     *
      * @return
      */
-    public String toString(){
+    public String toString() {
         String t = Integer.toString(this.tag);
         String m = Integer.toString(this.monat);
         String std = Integer.toString(this.stunde);
         String min = Integer.toString(this.minute);
-        if((this.tag-10) <0) {
+        if ((this.tag - 10) < 0) {
             t = "0" + Integer.toString(this.tag);
         }
-        if((this.monat - 10) < 0 ) {
+        if ((this.monat - 10) < 0) {
             m = "0" + this.monat;
         }
-        if((this.stunde - 10) < 0 ) {
+        if ((this.stunde - 10) < 0) {
             std = "0" + this.stunde;
         }
-        if((this.minute - 10) < 0 ) {
+        if ((this.minute - 10) < 0) {
             min = "0" + this.minute;
         }
         return t + "." + m + "." + this.jahr + ", " + std + ":" + min;
+    }
+
+    @Override
+    public int compareTo(Zeit o) {
+        if (Integer.compare(this.jahr, o.getJahr()) == 0) {
+            if (Integer.compare(this.monat, o.getMonat()) == 0) {
+                if (Integer.compare(this.tag, o.getTag()) == 0) {
+                    if (Integer.compare(this.stunde, o.getStunde()) == 0) {
+                        return Integer.compare(this.minute, o.getMinute());
+                    } else {
+                        return Integer.compare(this.stunde, o.getStunde());
+                    }
+                } else {
+                    return Integer.compare(this.tag, o.getTag());
+                }
+            } else {
+                return Integer.compare(this.monat, o.getMonat());
+            }
+        } else {
+            return Integer.compare(this.jahr, o.getJahr());
+        }
     }
 }

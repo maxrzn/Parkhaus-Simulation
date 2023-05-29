@@ -44,9 +44,6 @@ class ZeitTest {
         assertEquals("01.06.2023, 00:00",z.toString());
     }
 
-
-
-
     @Test
     @DisplayName("Es wird die korrekt addierte Zeit ausgegeben")
     void addTime() {
@@ -56,6 +53,20 @@ class ZeitTest {
         z.setTime("29.05.2023, 00:00");
         z.addTime(74,30);
         assertEquals("01.06.2023, 02:30", z.toString());
+    }
+
+    @Test
+    @DisplayName("Zeit lässt sich korrekt vergleichen")
+    void comparetime(){
+        z.setTime("2.6.2023, 0:0");
+        assertEquals(1,z.compareTo(new Zeit()));
+        z.setTime("2.6.2023, 12:30");
+        Zeit y = new Zeit();
+        y.setTime("2.6.2023, 12:31");
+        assertEquals(-1,z.compareTo(y));
+        assertEquals(0, new Zeit().compareTo(new Zeit()));
+        z.setTime("2.6.2023, 13:30");
+        assertEquals(1,z.compareTo(y));
     }
 
 }
