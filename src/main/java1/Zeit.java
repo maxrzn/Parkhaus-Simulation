@@ -43,12 +43,11 @@ public class Zeit {
         }
     }
     public void addTime(int stunde, int minute){
-        //TODO alte implementierung, Tage Monate Jahr handling fehlt
         this.minute = (this.minute+minute)%60;
         this.stunde = (this.stunde + stunde + (this.minute+minute)/60) % 24;
         tag += (this.stunde + stunde)/24;
         if(tag > tageInMonat(jahr, monat)){
-            tag = tag - tageinMonat(jahr, monat);
+            tag = tag - tageInMonat(jahr, monat);
             monat ++;
         }
         if(monat > 12){
