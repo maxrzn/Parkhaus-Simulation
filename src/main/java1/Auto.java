@@ -8,12 +8,17 @@ public class Auto {
     private Zeit parkende;
     private static int counter = 0;
 
-
+    /**
+     * konstruktor: setzt id,timestamp und parkende
+     * @param id
+     * @param timestamp
+     */
     public Auto(int id, Zeit timestamp) {
         this.id = id;
         this.timestamp = timestamp;
         counter++;
         timestamp.addTime(0,random());
+        this.parkende = timestamp;
     }
 
     /**
