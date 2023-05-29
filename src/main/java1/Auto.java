@@ -1,11 +1,13 @@
 package java1;
 
 import java.util.Random;
+import java.util.ArrayList;
 
 public class Auto {
     private int id;
     private Zeit timestamp;
     private Zeit parkende;
+    private int parkdauer;
     private static int counter = 0;
 
     /**
@@ -17,7 +19,8 @@ public class Auto {
         this.id = id;
         this.timestamp = timestamp;
         counter++;
-        timestamp.addTime(0,random());
+        this.parkdauer = random();
+        timestamp.addTime(0, this.parkdauer);
         this.parkende = timestamp;
     }
 
@@ -44,6 +47,9 @@ public class Auto {
         return a + (int)(Math.random() * (b - a));
     }
     public int getId() {return this.id;}
+    public Zeit getParkende(){return this.parkende;}
+    public Zeit getTimestamp(){return this.timestamp;}
+    public int getParkdauer(){return this.parkdauer;}
     public static int getCounter() {return counter;}
 }
 

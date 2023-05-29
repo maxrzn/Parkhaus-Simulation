@@ -29,4 +29,10 @@ public class ParkhausIFTest {
         assertEquals("Gute Fahrt", p1.push(p1.pull()));
     }
 
+    @Test
+    @DisplayName("Parkhaus checkt parkende der Autos")
+    void endeparkzeitTest() {
+
+    }
+
 }
