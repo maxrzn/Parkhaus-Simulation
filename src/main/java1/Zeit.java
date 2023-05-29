@@ -43,6 +43,7 @@ public class Zeit {
         }
     }
     public void addTime(int stunde, int minute){
+        //TODO alte implementierung, Tage Monate Jahr handling fehlt
         this.stunde = (this.stunde + stunde + (this.minute+minute)/60) % 24;
         this.minute = (this.minute+minute)%60;
     }
@@ -54,6 +55,11 @@ public class Zeit {
     public int getJahr(){return this.jahr;}
 
 
+    /**
+     *
+     * toString im Format "DD.MM.YYYY, ss:mm"
+     * @return
+     */
     public String toString(){
         String t = Integer.toString(this.tag);
         String m = Integer.toString(this.monat);
