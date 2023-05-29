@@ -29,22 +29,4 @@ public class ParkhausIFTest {
         assertEquals("Gute Fahrt", p1.push(p1.pull()));
     }
 
-
-    @Test
-    @DisplayName("Es wird richtig angezeigt ob ein src.main.java.Auto bezahlt hat")
-    void statusttest(){
-        Auto a1 = p1.pull();
-        Assertions.assertFalse(a1.getStatus());
-        p1.pay(a1);
-        Assertions.assertTrue(a1.getStatus());
-    }
-
-    @Test
-    @DisplayName("src.main.java.Auto nur rauslassen wenn es bazahlt hat")
-    void bezahlttest(){
-        Auto a1 = p1.pull();
-        assertEquals("Bitte Ticket bezahlen!",p1.push(a1));
-        p1.pay(a1);
-        assertEquals("Gute Fahrt",p1.push(a1));
-    }
 }

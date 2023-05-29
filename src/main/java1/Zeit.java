@@ -43,8 +43,8 @@ public class Zeit {
         }
     }
     public void addTime(int stunde, int minute){
-        this.minute = (this.minute+minute)%60;
         this.stunde = (this.stunde + stunde + (this.minute+minute)/60) % 24;
+        this.minute = (this.minute+minute)%60;
         tag += (this.stunde + stunde)/24;
         if(tag > tageInMonat(jahr, monat)){
             tag = tag - tageInMonat(jahr, monat);

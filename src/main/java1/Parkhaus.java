@@ -20,10 +20,6 @@ public class Parkhaus implements ParkhausIF {
 
     @Override
     public String push(Auto a1){
-
+        return " ";
     }
-
-
-
-
 }
