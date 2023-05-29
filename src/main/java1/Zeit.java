@@ -44,9 +44,51 @@ public class Zeit {
     }
     public void addTime(int stunde, int minute){
         //TODO alte implementierung, Tage Monate Jahr handling fehlt
-        this.stunde = (this.stunde + stunde + (this.minute+minute)/60) % 24;
         this.minute = (this.minute+minute)%60;
+        this.stunde = (this.stunde + stunde + (this.minute+minute)/60) % 24;
+        tag += (this.stunde + stunde)/24;
+        if(tag > tageInMonat(jahr, monat)){
+            tag = tag - tageinMonat(jahr, monat);
+            monat ++;
+        }
+        if(monat > 12){
+            monat = monat - 12;
+            jahr ++;
+        }
     }
+
+    private static int tageInMonat(int jahr, int monat){
+        if (istSchaltjahr(jahr) == true && monat == 2) { //bei einem Schaltjahr hat der Februar 29 statt 28 tage
+            return 29;
+        }
+        if (monat < 1 || monat > 12) {
+            throw new IllegalArgumentException("ungueltiger Wert fuer Monat:" + monat);
+        }
+        int tage = 30; //bei monat 4 6 und 9 blibt es bei 30 tagen
+        switch (monat) {
+            case 2: tage = 28; break;
+            case 4: break;
+            case 6: break;
+            case 9: break;
+            case 11: tage = 30; break;
+            default : tage = 31; break; // alle nicht angegebenen Monate haben 31 Tage
+        }
+        return tage;
+    }
+    private static boolean istSchaltjahr(int jahr) throws IllegalArgumentException {
+        if (jahr < 0) {
+            throw new IllegalArgumentException("ungueltiger Wert fuer Jahr:" + jahr);
+        }
+        if (jahr < 1583 && jahr % 4 == 0) {
+            return true;
+        }
+        else if (jahr%4 == 0 && (jahr%100 != 0 || jahr%400 == 0)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 
     public int getStunde(){return this.stunde;}
     public int getMinute(){return this.minute;}

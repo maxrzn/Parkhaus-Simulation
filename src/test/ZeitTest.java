@@ -46,16 +46,13 @@ class ZeitTest {
 
 
 
-    @Disabled("not adjusted")
+
     @Test
     @DisplayName("Es wird die korrekt addierte Zeit ausgegeben")
     void addTime() {
-        /*
-        assertEquals("1:0",z.addTime(12,30));
-        z.setTime(12,30);
-        assertEquals("13:5",z.addTime(0,35));
-        assertEquals("0:0",z.addTime(10,55));
-         */
+        z.setTime("29.05.2023, 00:00");
+        assertEquals("01.06.2023, 00:00",z.addTime(12,30));
+
     }
 
 }
