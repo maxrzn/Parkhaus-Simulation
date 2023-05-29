@@ -10,7 +10,7 @@
     <li>Kapazität  : </li>
     <li>Freie Plätze : </li>
     <li>Aktive Tickets : </li>
-    <li>Verbuchte Tickets : </li>
+    <li>Verbuchte Tickets: </li>
 </ul>
 </body>
 </html>
