@@ -8,7 +8,6 @@ public class Parkhaus implements ParkhausIF {
 
     public Parkhaus(){}
     /**
-     * pull()
      * erstellt ein auto(id,zeit), fügt es zu autoList hinzu
      * @return java1.Auto
      */
