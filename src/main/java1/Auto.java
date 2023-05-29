@@ -2,20 +2,20 @@ package java1;
 
 public class Auto {
     private int id;
-    private int Zeit;
-    private boolean paid1 = false;
+    private Zeit timestamp;
     private static int counter = 0;
 
-    public Auto(int id, int zeit) {
+    public Auto(int id, Zeit timestamp) {
         this.id = id;
+        this.timestamp = timestamp;
         counter++;
+
+
+    }
+    private int random(){
+
     }
     public int getId() {return this.id;}
-    public void paid(){
-        this.paid1 = true;
-    }
     public static int getCounter() {return counter;}
-    public boolean getStatus(){return this.paid1;}
-
 }
 
