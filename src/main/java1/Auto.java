@@ -9,8 +9,6 @@ public class Auto {
         this.id = id;
         this.timestamp = timestamp;
         counter++;
-
-
     }
     private int random(){
 
