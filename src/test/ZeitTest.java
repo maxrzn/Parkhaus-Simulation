@@ -51,8 +51,11 @@ class ZeitTest {
     @DisplayName("Es wird die korrekt addierte Zeit ausgegeben")
     void addTime() {
         z.setTime("29.05.2023, 00:00");
-        assertEquals("01.06.2023, 00:00",z.addTime(12,30));
-
+        z.addTime(2,30);
+        assertEquals("29.05.2023, 02:30", z.toString());
+        z.setTime("29.05.2023, 00:00");
+        z.addTime(74,30);
+        assertEquals("01.06.2023, 02:30", z.toString());
     }
 
 }
