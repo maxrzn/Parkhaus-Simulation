@@ -28,19 +28,29 @@ public class Zeit implements Comparable<Zeit> {
      *
      * @param input
      */
-    public void setTime(String input) throws NumberFormatException {
+    public void setTime(String input) throws NumberFormatException, IllegalArgumentException {
         String reg = "^([0-2]?[0-9]|3[0-1])[.]([0]?[0-9]|1[0-2])[.]([0-9][0-9][0-9][1-9]), ([0-1]?[0-9]|2[0-3])[:]([0-5]?[0-9])$";
+        Zeit tmp = new Zeit();
         if (input.matches(reg)) {
             Matcher m = Pattern.compile(reg).matcher(input);
             if (m.find()) {
-                this.tag = Integer.parseInt(m.group(1));
-                this.monat = Integer.parseInt(m.group(2));
-                this.jahr = Integer.parseInt(m.group(3));
-                this.stunde = Integer.parseInt(m.group(4));
-                this.minute = Integer.parseInt(m.group(5));
+                tmp.setTag(Integer.parseInt(m.group(1)));
+                tmp.setMonat(Integer.parseInt(m.group(2)));
+                tmp.setJahr(Integer.parseInt(m.group(3)));
+                tmp.setStunde(Integer.parseInt(m.group(4)));
+                tmp.setMinute(Integer.parseInt(m.group(5)));
+            }
+            if(this.compareTo(tmp) > 0){
+                throw new IllegalArgumentException("Raum-Zeit-Kontiuum verletzt");
+            } else {
+                this.tag = tmp.getTag();
+                this.monat = tmp.getMonat();
+                this.jahr = tmp.getJahr();
+                this.stunde = tmp.getStunde();
+                this.minute = tmp.getMinute();
             }
         } else {
-            throw new NumberFormatException("Raum-Zeit-Kontinuum verletzt");
+            throw new NumberFormatException();
         }
     }
 
@@ -118,6 +128,22 @@ public class Zeit implements Comparable<Zeit> {
 
     public int getJahr() {
         return this.jahr;
+    }
+
+    public void setTag(int tag) {
+        this.tag = tag;
+    }
+    public void setMonat(int monat) {
+        this.monat = monat;
+    }
+    public void setJahr(int jahr) {
+        this.jahr = jahr;
+    }
+    public void setStunde(int stunde) {
+        this.stunde = stunde;
+    }
+    public void setMinute(int minute) {
+        this.minute = minute;
     }
 
 

@@ -23,12 +23,15 @@ class ZeitTest {
     @Test
     @DisplayName("Zeit wird mit 29.05.2023, 12:30 gesetzt ")
     void zeit_setzen() {
-        z.setTime("29.05.2023, 12:30");
+        z.setTime("29.06.2023, 12:30");
         assertEquals(29, z.getTag());
-        assertEquals(5, z.getMonat());
+        assertEquals(6, z.getMonat());
         assertEquals(2023, z.getJahr());
         assertEquals(12,z.getStunde());
         assertEquals(30, z.getMinute());
+        assertThrows(IllegalArgumentException.class, () -> {
+           z.setTime("29.05.2023, 12:00");
+        });
     }
     @Test
     @DisplayName("flasche stunde und minute eingaben werfen exception")
@@ -47,12 +50,12 @@ class ZeitTest {
     @Test
     @DisplayName("Es wird die korrekt addierte Zeit ausgegeben")
     void addTime() {
-        z.setTime("29.05.2023, 00:00");
+        z.setTime("29.06.2023, 00:00");
         z.addTime(2,30);
-        assertEquals("29.05.2023, 02:30", z.toString());
-        z.setTime("29.05.2023, 00:00");
+        assertEquals("29.06.2023, 02:30", z.toString());
+        z.setTime("29.07.2023, 00:00");
         z.addTime(74,30);
-        assertEquals("01.06.2023, 02:30", z.toString());
+        assertEquals("01.08.2023, 02:30", z.toString());
     }
 
     @Test
