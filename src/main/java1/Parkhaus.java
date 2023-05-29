@@ -1,18 +1,22 @@
 package java1;
+import java.util.ArrayList;
 
 public class Parkhaus implements ParkhausIF {
 
-    private int aktuellezeit = 0;
+    private Zeit aktuellezeit = new Zeit();
+    private ArrayList autoList = new ArrayList<Auto>();
 
     public Parkhaus(){}
     /**
      * pull()
-     * erstellt ein auto(id,zeit)
-     * @return src.main.java.Auto: gibt src.main.java.Auto zurück, dass reingefahren ist
+     * erstellt ein auto(id,zeit), fügt es zu autoList hinzu
+     * @return java1.Auto
      */
    @Override
     public Auto pull() {
-        return new Auto(Auto.getCounter()+1, aktuellezeit);
+       Auto tmp = new Auto(Auto.getCounter()+1, aktuellezeit);
+       autoList.add(tmp);
+       return tmp;
     }
 
     @Override
