@@ -42,10 +42,9 @@ public class Zeit {
             throw new NumberFormatException("Raum-Zeit-Kontinuum verletzt");
         }
     }
-    public String addTime(int stunde, int minute){
+    public void addTime(int stunde, int minute){
         this.stunde = (this.stunde + stunde + (this.minute+minute)/60) % 24;
         this.minute = (this.minute+minute)%60;
-        return this.stunde +":"+this.minute;
     }
 
     public int getStunde(){return this.stunde;}

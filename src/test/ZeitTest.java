@@ -41,7 +41,7 @@ class ZeitTest {
     @Test
     @DisplayName("Es wird 1.6.2023, 0:0 als Zeit ausgegeben")
     void zeittoString() {
-        assertEquals("1.6.2023, 0:0",z.toString());
+        assertEquals("01.06.2023, 00:00",z.toString());
     }
 
 
