@@ -75,12 +75,12 @@ public class Zeit implements Comparable<Zeit> {
     }
 
     /**
-     * dividiert Zeit
+     * subtrahiert 2 Zeiten
      * @param z1 (Zeit)
      * @param z2 (Zeit)
      * @return min (int)
      */
-    public int divideTime(Zeit z1, Zeit z2){
+    public int subtractTime(Zeit z1, Zeit z2){
         //TODO
         return 0;
     }
