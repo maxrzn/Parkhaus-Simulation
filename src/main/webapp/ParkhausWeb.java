@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "ParkhausWeb", value = "/test")
+@WebServlet(name = "ParkhausWeb", value = "/ParkhausWeb")
 public class ParkhausWeb extends HttpServlet {
     private String message;
     private String param;
