@@ -28,6 +28,13 @@ public class Zeit implements Comparable<Zeit> {
         this.stunde = stunde;
         this.minute = minute;
     }
+    public Zeit(Zeit z) {
+        this.tag = z.getTag();
+        this.monat = z.getMonat();
+        this.jahr = z.getJahr();
+        this.stunde = z.getStunde();
+        this.minute = z.getMinute();
+    }
 
     /**
      * setTime u.a. im Format "DD.MM.YYYY, ss:mm"
@@ -76,13 +83,37 @@ public class Zeit implements Comparable<Zeit> {
 
     /**
      * subtrahiert 2 Zeiten
-     * @param z1 (Zeit)
-     * @param z2 (Zeit)
+     * @param start (Zeit)
      * @return min (int)
      */
-    public int subtractTime(Zeit z1, Zeit z2){
-        //TODO
-        return 0;
+    public int subtract(Zeit start) throws IllegalArgumentException {//this ist quasi parkende
+        if (this.compareTo(start) <= 0) {
+            throw new IllegalArgumentException("die übergebene Zeit ist nicht später als die eigene Zeit");
+        }
+        //wenn nur um 1 größer dann sagt die kleinere zeit den wahren unterschied
+        int y = this.jahr - start.getJahr();
+        int mo, d, h, m;
+        if (this.monat < start.getMonat()){
+            mo = 12 - start.getMonat() + this.monat;
+        } else{
+            mo = this.monat - start.getMonat();
+        }
+        if(this.tag < start.getTag()){
+            d = tageInMonat(start.getJahr(), start.getMonat()) - start.getTag() + this.tag;
+        } else{
+            d = this.tag - start.getTag();
+        }
+        if(this.stunde < start.getStunde()){
+            h = 24 - start.getStunde() + this.stunde;
+        } else{
+            h = this.stunde - start.getStunde();
+        }
+        if(this.minute < start.getMinute()){
+            m = 60 - start.getMinute() + this.minute;
+        } else{
+            m = this.minute - start.getMinute();
+        }
+        return m + (h - 1) * 60 + (d - 1) * 1440;
     }
 
     private static int tageInMonat(int jahr, int monat) {

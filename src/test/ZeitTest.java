@@ -72,4 +72,15 @@ class ZeitTest {
         assertEquals(1,z.compareTo(y));
     }
 
+    @Test
+    @DisplayName("Zeit wird richtig subtrahiert")
+    void testsubtract(){
+        Zeit z = new Zeit();
+        z.setTime("3.6.2023, 10:20");
+        Zeit y = new Zeit();
+        y.setTime("1.6.2023, 10:20");
+        int a = 48*60;
+        assertEquals(a,z.subtract(y));
+    }
+
 }

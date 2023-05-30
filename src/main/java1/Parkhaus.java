@@ -35,8 +35,8 @@ public class Parkhaus implements ParkhausIF {
 
     @Override
     public String push(Auto a1){
-       double preis = a1.getParkdauer() * this.tarif;
-       String log = "Auto: " + a1.getId() + ", Dauer: " + a1.getParkdauer() + "min, Preis: " + preis+"€";
+       double preis = this.aktuelleZeit.subtract(a1.getTimestamp()) * this.tarif;
+       String log = "Auto: " + a1.getId() + ", Dauer: " + this.aktuelleZeit.subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€";
        autoList.remove(a1);
        System.out.print(log+"\n");
        return log;
@@ -64,4 +64,5 @@ public class Parkhaus implements ParkhausIF {
     }
 
     public ArrayList<Auto> getAutoList(){return this.autoList;}
+    public Zeit getAktuelleZeit(){return this.aktuelleZeit;}
 }
