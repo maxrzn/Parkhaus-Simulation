@@ -46,10 +46,15 @@ public class Auto {
         Random r = new Random();
         return a + (int)(Math.random() * (b - a));
     }
+
+    public String toString(){return "Auto: " + this.id;}
     public int getId() {return this.id;}
     public Zeit getParkende(){return this.parkende;}
     public Zeit getTimestamp(){return this.timestamp;}
     public int getParkdauer(){return this.parkdauer;}
     public static int getCounter() {return counter;}
+
+    public void setParkende(Zeit parkende) {this.parkende = parkende;}
+    public void setParkdauer(int parkdauer) {this.parkdauer = parkdauer;}
 }
 

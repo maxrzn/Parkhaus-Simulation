@@ -4,13 +4,23 @@ import java1.Auto;
 
 public class Parkhaus implements ParkhausIF {
 
-    private Zeit aktuellezeit = new Zeit();
+    private Zeit aktuelleZeit = new Zeit();
     private double tarif;
     private ArrayList<Auto> autoList = new ArrayList<Auto>();
 
+    /**
+     * konstruktor
+     * @param size Parkhaus
+     * @param tarif in Euro pro min
+     */
     public Parkhaus(int size, double tarif){
         autoList = new ArrayList<Auto>(size);
         this.tarif = tarif;
+    }
+    public Parkhaus(int size, double tarif, Zeit z1){
+        autoList = new ArrayList<Auto>(size);
+        this.tarif = tarif;
+        aktuelleZeit = z1;
     }
     /**
      * erstellt ein auto(id,zeit), fügt es zu autoList hinzu
@@ -18,36 +28,40 @@ public class Parkhaus implements ParkhausIF {
      */
    @Override
     public Auto pull() {
-       Auto tmp = new Auto(Auto.getCounter()+1, aktuellezeit);
+       Auto tmp = new Auto(Auto.getCounter()+1, aktuelleZeit);
        autoList.add(tmp);
        return tmp;
     }
 
     @Override
-    public String push(int a1){
-       double preis = autoList.get(a1).getParkdauer() * this.tarif;
-       String log = "Auto: " + autoList.get(a1).getId() + " Dauer: " + autoList.get(a1).getParkdauer() + "Preis: " + preis;
+    public String push(Auto a1){
+       double preis = a1.getParkdauer() * this.tarif;
+       String log = "Auto: " + a1.getId() + ", Dauer: " + a1.getParkdauer() + "min, Preis: " + preis+"€";
        autoList.remove(a1);
+       System.out.print(log+"\n");
        return log;
     }
-    public void timewarp(){
-     //TODO aktuellezeit.setTime()
+    public void timewarp(String timestamp){
+     aktuelleZeit.setTime(timestamp);
      checkparktime();
     }
-    public void timeskip(){
-       //TODO aktuelleZeit.addTime()
+    public void timeskip(int stunde, int minute){
+       this.aktuelleZeit.addTime(stunde, minute);
        checkparktime();
     }
     /**
     * prüft ob die Parkzeit eines Autos abgelaufen ist und ruft push(i) auf
     */
     public void checkparktime() {
-        for(int i=0; i<autoList.size(); i++) {
-            if (autoList.get(i) != null) {
-                if(autoList.get(i).getParkende().compareTo(this.aktuellezeit) <= 0){
-                    push(i);
+        ArrayList<Auto> tmp = new ArrayList<Auto>(this.autoList);
+        for(int i=0; i<tmp.size(); i++) {
+            if (tmp.get(i) != null) {
+                if(tmp.get(i).getParkende().compareTo(this.aktuelleZeit) <= 0){
+                    push(tmp.get(i));
                 }
             }
         }
     }
+
+    public ArrayList<Auto> getAutoList(){return this.autoList;}
 }

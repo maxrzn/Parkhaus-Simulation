@@ -11,6 +11,7 @@ public class Zeit implements Comparable<Zeit> {
     private int minute;
 
     /**
+     * default Kontruktor
      * initiiert Zeit mit "1.6.2023, 0:0"
      */
     public Zeit() {
@@ -20,6 +21,13 @@ public class Zeit implements Comparable<Zeit> {
         this.stunde = 0;
         this.minute = 0;
 
+    }
+    public Zeit(int tag, int monat, int jahr, int stunde, int minute) {
+        this.tag = tag;
+        this.monat = monat;
+        this.jahr = jahr;
+        this.stunde = stunde;
+        this.minute = minute;
     }
 
 
