@@ -1,4 +1,4 @@
-package java1;
+package webapp;
 
 import java.io.*;
 import javax.servlet.Servlet;
