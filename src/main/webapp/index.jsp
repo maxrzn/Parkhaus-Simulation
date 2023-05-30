@@ -16,7 +16,7 @@
         </title>
 </head>
 <body>
-<h1> Hier gehts zum Parkhaus
+<h1> Hier gehts zum Parkhaus!
     <a href="ParkHausWeb">WebParkhaus</a>
 </h1>
 </body>
