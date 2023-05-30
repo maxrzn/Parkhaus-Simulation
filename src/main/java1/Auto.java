@@ -2,7 +2,7 @@ package java1;
 
 import java.util.Random;
 import java.util.ArrayList;
-
+//TODO parkdauer setter/variable löschen wenn implementation in Parkhaus/Zeit fertig
 public class Auto {
     private int id;
     private Zeit timestamp;

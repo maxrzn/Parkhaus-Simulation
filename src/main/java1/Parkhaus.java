@@ -1,7 +1,7 @@
 package java1;
 import java.util.ArrayList;
 import java1.Auto;
-
+//TODO Push so überarbeiten dass Parkdauern nicht mehr nötig ist
 public class Parkhaus implements ParkhausIF {
 
     private Zeit aktuelleZeit = new Zeit();

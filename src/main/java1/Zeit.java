@@ -2,7 +2,6 @@ package java1;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 public class Zeit implements Comparable<Zeit> {
     private int tag;
     private int monat;
@@ -29,7 +28,6 @@ public class Zeit implements Comparable<Zeit> {
         this.stunde = stunde;
         this.minute = minute;
     }
-
 
     /**
      * setTime u.a. im Format "DD.MM.YYYY, ss:mm"
@@ -74,6 +72,17 @@ public class Zeit implements Comparable<Zeit> {
             monat = monat - 12;
             jahr++;
         }
+    }
+
+    /**
+     * dividiert Zeit
+     * @param z1 (Zeit)
+     * @param z2 (Zeit)
+     * @return min (int)
+     */
+    public int divideTime(Zeit z1, Zeit z2){
+        //TODO
+        return 0;
     }
 
     private static int tageInMonat(int jahr, int monat) {
