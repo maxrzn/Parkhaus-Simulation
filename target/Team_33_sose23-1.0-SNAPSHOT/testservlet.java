@@ -6,8 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "testServlet", value = "/test")
-public class testservlet extends HttpServlet {
+@WebServlet(name = "ParkHaus", value = "/parkhaus")
+public class ParkHaus extends HttpServlet {
     private String message;
     private String param;
     private String command;
@@ -18,7 +18,7 @@ public class testservlet extends HttpServlet {
         message = "Hallo Mensch ohne Namen";
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    /*public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         boolean urlparamfound = false;
         if(request.getQueryString() != null) {urlparamfound = true;}
@@ -58,7 +58,7 @@ public class testservlet extends HttpServlet {
         int erg = this.zahl1 + this.zahl2;
         out.println("<html><body> "+erg+"</body></html>");
     }
-
+    */
     public void destroy() {
     }
 }

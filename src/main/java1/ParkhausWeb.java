@@ -1,4 +1,4 @@
-package webapp;
+package java1;
 
 import java.io.*;
 import javax.servlet.Servlet;
@@ -6,7 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
-@WebServlet(name = "ParkhausWeb", value = "/ParkhausWeb")
+@WebServlet(name = "ParkhausWeb", value = "/ParkHausWeb")
 public class ParkhausWeb extends HttpServlet {
     private String message;
     private String param;
