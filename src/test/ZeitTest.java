@@ -76,10 +76,10 @@ class ZeitTest {
     @DisplayName("Zeit wird richtig subtrahiert")
     void testsubtract(){
         Zeit z = new Zeit();
-        z.setTime("1.6.2023, 10:50");
+        z.setTime("2.6.2023, 13:50");
         Zeit y = new Zeit();
         y.setTime("1.6.2023, 10:20");
-        int a = 30;
+        int a = 27*60+30;
         assertEquals(a,z.subtract(y));
     }
 

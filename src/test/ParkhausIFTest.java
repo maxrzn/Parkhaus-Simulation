@@ -46,10 +46,10 @@ public class ParkhausIFTest {
         Auto a4 = p1.pull();
         a4.setParkende(new Zeit(1,6,2023,17,30));
         p1.timeskip(48,0);
-        assertEquals(   "Auto: 1, Dauer: 90min, Preis: 0.9€\n" +
-                                "Auto: 2, Dauer: 120min, Preis: 1.2€\n" +
-                                "Auto: 3, Dauer: 150min, Preis: 1.5€\n" +
-                                "Auto: 4, Dauer: 180min, Preis: 1.8€\n",outContent.toString());
+        assertEquals(   "Auto: 3, Dauer: 90min, Preis: 0.9€\n" +
+                                "Auto: 4, Dauer: 120min, Preis: 1.2€\n" +
+                                "Auto: 5, Dauer: 150min, Preis: 1.5€\n" +
+                                "Auto: 6, Dauer: 180min, Preis: 1.8€\n",outContent.toString());
 
     }
 
