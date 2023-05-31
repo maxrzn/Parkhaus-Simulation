@@ -83,4 +83,12 @@ class ZeitTest {
         assertEquals(a,z.subtract(y));
     }
 
+    @Test
+    @DisplayName("to String test")
+    void toStringtest(){
+        Zeit z = new Zeit();
+        z.setTime("03.06.2023, 10:20");
+        assertEquals("3.6.2023, 10:20", z.toString());
+    }
+
 }

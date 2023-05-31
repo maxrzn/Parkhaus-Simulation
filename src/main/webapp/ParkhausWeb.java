@@ -48,7 +48,7 @@ public class ParkhausWeb extends HttpServlet {
                         "        <td>\n" +
                         "           <form method=\"post\">\n" +
                         //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
-                        "               <input type=\"/text\" name=\"inputzeitsprung\" value="+p.getAktuelleZeit().toString()+">" +
+                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">" +
                         "               <input type=\"submit\" value=\"Timewarp\">\n" +
                         "           </form>\n" +
                         "        </td>\n" +
@@ -83,7 +83,26 @@ public class ParkhausWeb extends HttpServlet {
 
         //request.setAttribute("inputzeitsprung",p.getAktuelleZeit().toString());
         //this.zahl2 = Integer.parseInt(request.getParameter("input15min"));
-        out.println("<html><body> "+ p.getAktuelleZeit() +"</body></html>");
+        out.println("<html><body> ");
+        out.println("<br>\n" +
+                "<b> aktuelle Zeit</b> " +
+                        "<table>\n" +
+                        "    <tr>\n" +
+                        "        <td>\n" +
+                        "           <form method=\"post\">\n" +
+                        //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
+                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">" +
+                        "               <input type=\"submit\" value=\"Timewarp\">\n" +
+                        "           </form>\n" +
+                        "        </td>\n" +
+                        "        <td>\n" +
+                        "            <form method=\"post\">\n" +
+                        "            <input type=\"button\" value=\"+15 min\" name=\"input15min\">\n" +
+                        "            </form>\n" +
+                        "        </td>\n" +
+                        "    </tr>\n" +
+                        "</table>");
+        out.println("</body></html>");
     }
 
     public void destroy() {
