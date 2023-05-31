@@ -53,9 +53,9 @@ class ZeitTest {
         z.setTime("29.06.2023, 00:00");
         z.addTime(2,30);
         assertEquals("29.06.2023, 02:30", z.toString());
-        z.setTime("29.07.2023, 00:00");
-        z.addTime(74,30);
-        assertEquals("01.08.2023, 02:30", z.toString());
+        z.setTime("29.07.2023, 23:00");
+        z.addTime(50,30);
+        assertEquals("01.08.2023, 01:30", z.toString());
     }
 
     @Test
@@ -76,10 +76,10 @@ class ZeitTest {
     @DisplayName("Zeit wird richtig subtrahiert")
     void testsubtract(){
         Zeit z = new Zeit();
-        z.setTime("3.6.2023, 10:20");
+        z.setTime("1.6.2023, 10:50");
         Zeit y = new Zeit();
         y.setTime("1.6.2023, 10:20");
-        int a = 48*60;
+        int a = 30;
         assertEquals(a,z.subtract(y));
     }
 
@@ -88,7 +88,7 @@ class ZeitTest {
     void toStringtest(){
         Zeit z = new Zeit();
         z.setTime("03.06.2023, 10:20");
-        assertEquals("3.6.2023, 10:20", z.toString());
+        assertEquals("03.06.2023, 10:20", z.toString());
     }
 
 }

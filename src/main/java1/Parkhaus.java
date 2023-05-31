@@ -1,10 +1,9 @@
 package java1;
 import java.util.ArrayList;
 import java1.Auto;
-//TODO Push so überarbeiten dass Parkdauern nicht mehr nötig ist
 public class Parkhaus implements ParkhausIF {
 
-    private Zeit aktuelleZeit = new Zeit();
+    private Zeit aktuelleZeit;
     private double tarif;
     private ArrayList<Auto> autoList = new ArrayList<Auto>();
 
@@ -15,6 +14,7 @@ public class Parkhaus implements ParkhausIF {
      */
     public Parkhaus(int size, double tarif){
         autoList = new ArrayList<Auto>(size);
+        aktuelleZeit = new Zeit();
         this.tarif = tarif;
     }
     public Parkhaus(int size, double tarif, Zeit z1){
@@ -35,8 +35,8 @@ public class Parkhaus implements ParkhausIF {
 
     @Override
     public String push(Auto a1){
-       double preis = this.aktuelleZeit.subtract(a1.getTimestamp()) * this.tarif;
-       String log = "Auto: " + a1.getId() + ", Dauer: " + this.aktuelleZeit.subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€";
+       double preis = a1.getParkende().subtract(a1.getTimestamp()) * this.tarif;
+       String log = "Auto: " + a1.getId() + ", Dauer: " + a1.getParkende().subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€";
        autoList.remove(a1);
        System.out.print(log+"\n");
        return log;

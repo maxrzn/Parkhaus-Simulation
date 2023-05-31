@@ -68,8 +68,6 @@ public class Zeit implements Comparable<Zeit> {
     }
 
     public void addTime(int stunde, int minute) {
-        this.stunde = (this.stunde + stunde + (this.minute + minute) / 60) % 24;
-        this.minute = (this.minute + minute) % 60;
         tag += (this.stunde + stunde) / 24;
         if (tag > tageInMonat(jahr, monat)) {
             tag = tag - tageInMonat(jahr, monat);
@@ -79,6 +77,8 @@ public class Zeit implements Comparable<Zeit> {
             monat = monat - 12;
             jahr++;
         }
+        this.stunde = (this.stunde + stunde + (this.minute + minute) / 60) % 24;
+        this.minute = (this.minute + minute) % 60;
     }
 
     /**
@@ -87,9 +87,9 @@ public class Zeit implements Comparable<Zeit> {
      * @return min (int)
      */
     public int subtract(Zeit start) throws IllegalArgumentException {//this ist quasi parkende
-        if (this.compareTo(start) <= 0) {
+        /*if (this.compareTo(start) <= 0) {
             throw new IllegalArgumentException("die übergebene Zeit ist nicht später als die eigene Zeit");
-        }
+        }*/
         //wenn nur um 1 größer dann sagt die kleinere zeit den wahren unterschied
         int y = this.jahr - start.getJahr();
         int mo, d, h, m;

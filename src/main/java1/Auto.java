@@ -2,10 +2,9 @@ package java1;
 
 import java.util.Random;
 import java.util.ArrayList;
-//TODO parkdauer setter/variable löschen wenn implementation in Parkhaus/Zeit fertig
 public class Auto {
     private int id;
-    private Zeit timestamp;
+    private final Zeit timestamp;
     private Zeit parkende;
     private static int counter = 0;
 
@@ -16,11 +15,16 @@ public class Auto {
      */
     public Auto(int id, Zeit timestamp) {
         this.id = id;
-        this.timestamp = timestamp;
+        this.timestamp = new Zeit(timestamp);
         counter++;
         Zeit tmp = new Zeit(timestamp);
         tmp.addTime(0, random());
         this.parkende = tmp;
+    }
+    public Auto(Auto a1) {
+        this.id = a1.getId();
+        this.timestamp = a1.getTimestamp();
+        this.parkende = a1.getParkende();
     }
 
     /**

@@ -30,10 +30,10 @@ public class ParkhausIFTest {
         assertEquals("Auto: 2", a.toString());
     }
 
-    @Disabled
     @Test
     @DisplayName("auto wird aus liste gelöscht und log wird angezeigt")
     void pushtest(){
+        p1.timewarp("30.05.2023, 12:30");
         Auto a = p1.pull();
         a.setParkende(new Zeit(30,05,2023,14,0));
         p1.timeskip(2,0);
@@ -43,11 +43,13 @@ public class ParkhausIFTest {
         a2.setParkende(new Zeit(30,05,2023,17,0));
         Auto a3 = p1.pull();
         a3.setParkende(new Zeit(30,05,2023,17,30));
+        Auto a4 = p1.pull();
+        a4.setParkende(new Zeit(1,6,2023,17,30));
         p1.timeskip(48,0);
-        assertEquals("Auto: 3, Dauer: 120min, Preis: 1.2€\n" +
-                "Auto: 4, Dauer: 30min, Preis: 0.3€\n" +
-                "Auto: 5, Dauer: 60min, Preis: 0.6€\n" +
-                "Auto: 6, Dauer: 90min, Preis: 0.9€\n",outContent.toString());
+        assertEquals(   "Auto: 1, Dauer: 90min, Preis: 0.9€\n" +
+                                "Auto: 2, Dauer: 120min, Preis: 1.2€\n" +
+                                "Auto: 3, Dauer: 150min, Preis: 1.5€\n" +
+                                "Auto: 4, Dauer: 180min, Preis: 1.8€\n",outContent.toString());
 
     }
 
