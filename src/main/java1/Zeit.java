@@ -93,27 +93,32 @@ public class Zeit implements Comparable<Zeit> {
         //wenn nur um 1 größer dann sagt die kleinere zeit den wahren unterschied
         int y = this.jahr - start.getJahr();
         int mo, d, h, m;
-        if (this.monat < start.getMonat()){
+        if (this.monat < start.getMonat()) {
             mo = 12 - start.getMonat() + this.monat;
-        } else{
+        } else {
             mo = this.monat - start.getMonat();
         }
-        if(this.tag < start.getTag()){
+        if (mo >= 1) {
             d = tageInMonat(start.getJahr(), start.getMonat()) - start.getTag() + this.tag;
-        } else{
+        } else {
             d = this.tag - start.getTag();
         }
-        if(this.stunde < start.getStunde()){
+        if (d == 1) {
             h = 24 - start.getStunde() + this.stunde;
-        } else{
+        } else if (d == 2) {
+            h = 48 - start.getStunde() + this.stunde;
+        } else {//d == 0
             h = this.stunde - start.getStunde();
         }
-        if(this.minute < start.getMinute()){
+        if (h >= 1) {
             m = 60 - start.getMinute() + this.minute;
-        } else{
+        } else {
             m = this.minute - start.getMinute();
         }
-        return m + (h - 1) * 60 + (d - 1) * 1440;
+        if (h == 0) {
+            h = 1;
+        }
+        return m + (h - 1) * 60;
     }
 
     private static int tageInMonat(int jahr, int monat) {

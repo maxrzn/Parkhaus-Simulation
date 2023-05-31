@@ -48,8 +48,8 @@ public class ParkhausWeb extends HttpServlet {
                         "        <td>\n" +
                         "           <form method=\"post\">\n" +
                         //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
-                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">" +
-                        "               <input type=\"submit\" value=\"Timewarp\">\n" +
+                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
+                        "               <input type=\"submit\" value=\"Timewarp\">" +
                         "           </form>\n" +
                         "        </td>\n" +
                         "        <td>\n" +
@@ -91,7 +91,7 @@ public class ParkhausWeb extends HttpServlet {
                         "        <td>\n" +
                         "           <form method=\"post\">\n" +
                         //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
-                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">" +
+                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
                         "               <input type=\"submit\" value=\"Timewarp\">\n" +
                         "           </form>\n" +
                         "        </td>\n" +
