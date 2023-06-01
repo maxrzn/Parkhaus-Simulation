@@ -54,23 +54,15 @@ public class ParkhausWeb extends HttpServlet {
                         "        </td>\n" +
                         "        <td>\n" +
                         "            <form method=\"post\">\n" +
-                        "            <input type=\"button\" value=\"+15 min\" name=\"input15min\">\n" +
+                        "            <input type=\"submit\" value=\"+15 min\" name=\"input15min\">\n" +
                         "            </form>\n" +
                         "        </td>\n" +
+                        "        <td>\n" +
+                        "            <form method=\"post\">\n" +
+                        "            <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
+                        "        </td>\n" +
                         "    </tr>\n" +
-                        "</table>"
-
-
-
-                /*"<form method=\"post\">\n" +
-                "<label for=\"zeitsprung\">Zeitsprung: </label>\n" +
-                "<input type=\"submit\" id=\"inputzeitsprung\" name=\"zeitsprung\">\n" +
-                "<br><br>\n" +
-                "<label for=\"15min\">+15min</label>\n" +
-                "<input type=\"text\" id=\"input15min\" name=\"15min\">\n" +
-                "<br><br>\n" +
-                "<input type=\"submit\" value=\"Submit\">" +
-                "</form>"*/);
+                        "</table>");
         out.println("</body></html>");
     }
 
@@ -78,27 +70,42 @@ public class ParkhausWeb extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
 
-        String zeitsprung = request.getParameter("inputzeitsprung");
-        p.timewarp(zeitsprung);
+        //Zeitsprung
+        if(request.getParameter("inputzeitsprung") != null) {
+            p.timewarp(request.getParameter("inputzeitsprung"));
+        }
+        //+15 min
+        if(request.getParameter("input15min") != null){
+            p.timeskip(0,15);
+        }
+        //+1h
+        if(request.getParameter("input1h") != null) {
+            p.timeskip(1,0);
+        }
+
 
         //request.setAttribute("inputzeitsprung",p.getAktuelleZeit().toString());
         //this.zahl2 = Integer.parseInt(request.getParameter("input15min"));
         out.println("<html><body> ");
         out.println("<br>\n" +
-                "<b> aktuelle Zeit</b> " +
+                        "<b> aktuelle Zeit</b> " +
                         "<table>\n" +
                         "    <tr>\n" +
                         "        <td>\n" +
                         "           <form method=\"post\">\n" +
                         //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
                         "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
-                        "               <input type=\"submit\" value=\"Timewarp\">\n" +
+                        "               <input type=\"submit\" value=\"Timewarp\">" +
                         "           </form>\n" +
                         "        </td>\n" +
                         "        <td>\n" +
                         "            <form method=\"post\">\n" +
-                        "            <input type=\"button\" value=\"+15 min\" name=\"input15min\">\n" +
+                        "            <input type=\"submit\" value=\"+15 min\" name=\"input15min\">\n" +
                         "            </form>\n" +
+                        "        </td>\n" +
+                        "        <td>\n" +
+                        "            <form method=\"post\">\n" +
+                        "            <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
                         "        </td>\n" +
                         "    </tr>\n" +
                         "</table>");
