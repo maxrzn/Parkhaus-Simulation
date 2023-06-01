@@ -54,7 +54,7 @@ public class Zeit implements Comparable<Zeit> {
                 tmp.setMinute(Integer.parseInt(m.group(5)));
             }
             if(this.compareTo(tmp) > 0){
-                throw new IllegalArgumentException("Raum-Zeit-Kontiuum verletzt");
+                throw new IllegalArgumentException("Raum-Zeit-Kontinuum verletzt");
             } else {
                 this.tag = tmp.getTag();
                 this.monat = tmp.getMonat();

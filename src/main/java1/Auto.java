@@ -3,7 +3,7 @@ package java1;
 import java.util.Random;
 import java.util.ArrayList;
 public class Auto {
-    private int id;
+    private String id;
     private final Zeit timestamp;
     private Zeit parkende;
     private static int counter = 0;
@@ -14,7 +14,7 @@ public class Auto {
      * @param timestamp
      */
     public Auto(int id, Zeit timestamp) {
-        this.id = id;
+        this.id = randomkfz(id);
         this.timestamp = new Zeit(timestamp);
         counter++;
         Zeit tmp = new Zeit(timestamp);
@@ -45,13 +45,33 @@ public class Auto {
             return myRandom(481, 2881);
         }
     }
+
+    /**
+     * erstellt random kennzeichen im Format "B BB ZZ[id]"
+     * letzte zahl ist id vom Auto
+     * @param id
+     * @return kfz(String)
+     */
+    private String randomkfz(int id){
+        Random r = new Random();
+        String kfz ="";
+        kfz += (char) (r.nextInt(26)+'A')
+                + " "
+                + (char) (r.nextInt(26)+'A')
+                + (char) (r.nextInt(26)+'A')
+                +" "
+                + (char) (r.nextInt(10) + '0')
+                + (char) (r.nextInt(10) + '0')
+                + String.valueOf(id);
+        return kfz;
+    }
     private static int myRandom(int a, int b) {
         Random r = new Random();
         return a + (int)(Math.random() * (b - a));
     }
 
     public String toString(){return "Auto: " + this.id;}
-    public int getId() {return this.id;}
+    public String getId() {return this.id;}
     public Zeit getParkende(){return this.parkende;}
     public Zeit getTimestamp(){return this.timestamp;}
     public static int getCounter() {return counter;}
