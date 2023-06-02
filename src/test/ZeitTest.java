@@ -56,6 +56,9 @@ class ZeitTest {
         z.setTime("29.07.2023, 23:00");
         z.addTime(50,30);
         assertEquals("01.08.2023, 01:30", z.toString());
+        z.setTime("01.08.2023, 23:30");
+        z.addTime(0,45);
+        assertEquals("02.08.2023, 00:15",z.toString());
     }
 
     @Test

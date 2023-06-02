@@ -68,7 +68,7 @@ public class Zeit implements Comparable<Zeit> {
     }
 
     public void addTime(int stunde, int minute) {
-        tag += (this.stunde + stunde) / 24;
+        tag += (this.stunde + stunde + (this.minute + minute) / 60) / 24;
         if (tag > tageInMonat(jahr, monat)) {
             tag = tag - tageInMonat(jahr, monat);
             monat++;
