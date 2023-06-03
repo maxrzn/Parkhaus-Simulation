@@ -52,7 +52,7 @@ public class Parkhaus implements ParkhausIF {
         for(int i=0; i<list.size();i++){
             double preis = list.get(i).getParkende().subtract(list.get(i).getTimestamp()) * this.tarif;
             preis = Math.round(preis*100.0)/100.0;
-            log += "Auto: " + list.get(i).getId() + ", Dauer: " + list.get(i).getParkende().subtract(list.get(i).getTimestamp()) + "min, Preis: " + preis+"&#8364\n";
+            log += "Kennzeichen: " + list.get(i).getId() + ", Dauer: " + list.get(i).getParkende().subtract(list.get(i).getTimestamp()) + " min, Preis: " + preis+"&#8364\n <br>";
             autoList.remove(list.get(i));
         }
         this.log += log;

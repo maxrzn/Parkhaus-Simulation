@@ -15,11 +15,13 @@ public class ParkhausWeb extends HttpServlet {
     private String param;
     private String command;
     private Parkhaus p;
+    //private String log;
 
 
     public void init() {
         message = "Parkhaus";
         p = new Parkhaus(10,0.01,new Zeit(4,4,2023,12,30));
+        //log = "empty log";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
