@@ -41,28 +41,35 @@ public class ParkhausWeb extends HttpServlet {
         } else {
             out.println("<h1>"+this.message+"</h1>");
         }*/
-        out.println(    "<br>\n" +
-                        "<b> aktuelle Zeit</b> " +
-                        "<table>\n" +
-                        "    <tr>\n" +
-                        "        <td>\n" +
-                        "           <form method=\"post\">\n" +
-                        //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
-                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
-                        "               <input type=\"submit\" value=\"Timewarp\">" +
-                        "           </form>\n" +
-                        "        </td>\n" +
-                        "        <td>\n" +
-                        "            <form method=\"post\">\n" +
-                        "            <input type=\"submit\" value=\"+15 min\" name=\"input15min\">\n" +
-                        "            </form>\n" +
-                        "        </td>\n" +
-                        "        <td>\n" +
-                        "            <form method=\"post\">\n" +
-                        "            <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
-                        "        </td>\n" +
-                        "    </tr>\n" +
-                        "</table>");
+        out.println("<br>\n" +
+                "<b> aktuelle Zeit</b> " +
+                "<table>\n" +
+                "    <tr>\n" +
+                "        <td>\n" +
+                "           <form method=\"post\">\n" +
+                //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
+                "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
+                "               <input type=\"submit\" value=\"Timewarp\">" +
+                "           </form>\n" +
+                "        </td>\n" +
+                "        <td>\n" +
+                "            <form method=\"post\">\n" +
+                "            <input type=\"submit\" value=\"+15 min\" name=\"input15min\">\n" +
+                "            </form>\n" +
+                "        </td>\n" +
+                "        <td>\n" +
+                "            <form method=\"post\">\n" +
+                "            <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
+                "        </td>\n" +
+                "    </tr>\n" +
+                "   <tr>\n" +
+                "       <td>\n" +
+                "            <form method=\"post\">\n" +
+                "               <input type=\"submit\" value=\"auto parken\" name=\"pull\">\n" +
+                "       </td>\n" +
+                "   </tr>\n" +
+                "</table>\n" +
+                "<p>" + p.getLog() + "</p>");
         out.println("</body></html>");
     }
 
@@ -81,6 +88,10 @@ public class ParkhausWeb extends HttpServlet {
         //+1h
         if(request.getParameter("input1h") != null) {
             p.timeskip(1,0);
+        }
+        //pull
+        if(request.getParameter("pull") != null) {
+            p.pull();
         }
 
 
@@ -108,7 +119,14 @@ public class ParkhausWeb extends HttpServlet {
                         "            <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
                         "        </td>\n" +
                         "    </tr>\n" +
-                        "</table>");
+                        "   <tr>\n" +
+                        "       <td>\n" +
+                        "            <form method=\"post\">\n" +
+                        "               <input type=\"submit\" value=\"auto parken\" name=\"pull\">\n" +
+                        "       </td>\n" +
+                        "   </tr>\n" +
+                        "</table>\n" +
+                        "<p>" + p.getLog() + "</p>");
         out.println("</body></html>");
     }
 

@@ -8,6 +8,7 @@ public class Parkhaus implements ParkhausIF {
     private Zeit aktuelleZeit;
     private double tarif;
     private ArrayList<Auto> autoList = new ArrayList<Auto>();
+    private String log;
 
     /**
      * konstruktor
@@ -18,11 +19,13 @@ public class Parkhaus implements ParkhausIF {
         autoList = new ArrayList<Auto>(size);
         aktuelleZeit = new Zeit();
         this.tarif = tarif;
+        this.log = "";
     }
     public Parkhaus(int size, double tarif, Zeit z1){
         autoList = new ArrayList<Auto>(size);
         this.tarif = tarif;
         aktuelleZeit = z1;
+        this.log = "";
     }
     /**
      * erstellt ein auto(id,zeit), fügt es zu autoList hinzu
@@ -38,9 +41,9 @@ public class Parkhaus implements ParkhausIF {
     @Override
     public String push(Auto a1){
        double preis = a1.getParkende().subtract(a1.getTimestamp()) * this.tarif;
-       String log = "Auto: " + a1.getId() + ", Dauer: " + a1.getParkende().subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€";
+       String log = "Auto: " + a1.getId() + ", Dauer: " + a1.getParkende().subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€\n";
        autoList.remove(a1);
-       System.out.print(log+"\n");
+       this.log += log;
        return log;
     }
     public String push(List<Auto> list){
@@ -48,10 +51,11 @@ public class Parkhaus implements ParkhausIF {
         String log = "";
         for(int i=0; i<list.size();i++){
             double preis = list.get(i).getParkende().subtract(list.get(i).getTimestamp()) * this.tarif;
-            log += "Auto: " + list.get(i).getId() + ", Dauer: " + list.get(i).getParkende().subtract(list.get(i).getTimestamp()) + "min, Preis: " + preis+"€\n";
+            preis = Math.round(preis*100.0)/100.0;
+            log += "Auto: " + list.get(i).getId() + ", Dauer: " + list.get(i).getParkende().subtract(list.get(i).getTimestamp()) + "min, Preis: " + preis+"&#8364\n";
             autoList.remove(list.get(i));
         }
-        System.out.print(log+"\n");
+        this.log += log;
         return log;
     }
     public void timewarp(String timestamp){
@@ -85,4 +89,5 @@ public class Parkhaus implements ParkhausIF {
 
     public ArrayList<Auto> getAutoList(){return this.autoList;}
     public Zeit getAktuelleZeit(){return this.aktuelleZeit;}
+    public String getLog(){return this.log;}
 }
