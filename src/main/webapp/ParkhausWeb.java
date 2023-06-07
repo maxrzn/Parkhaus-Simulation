@@ -229,20 +229,20 @@ public class ParkhausWeb extends HttpServlet {
                 "</style>");
 
         out.println(
-               // "<fieldset>" +
-              //  "   <legend> <h3> Environmental Settings </h3> </legend>" +
-                "<table style =\"border:1px solid black;\" >\n" +
+                "<fieldset>   <legend> <h3> Environmental Settings </h3> </legend><table style =\"border:1px solid black;\" >\n" +
                 "    <thead>\n" +
                 "        <tr>\n" +
                 "        <th colspan=\"5\" align=\"center\"><b> Zeiteinstellungen </b> </th>\n" +
                 "        <th>&nbsp;</th>\n" +
                 "        <th colspan=\"2\"> Autos </th>\n" +
-                "    </thead>\n"+
+                "        <th>&nbsp;</th>\n" +
+                "        <th colspan=\"2\" align=\"center\"> Parkhaus </th>\n" +
+                "    </thead>\n" +
                 "    <tbody>\n" +
                 "        <tr>\n" +
                 "            <td>\n" +
                 "                <form method=\"post\">\n" +
-                "                <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
+                "                <input type=\"/text\" name=\"inputzeitsprung\" value=\"05.04.2023, 13:30\">\n" +
                 "                </form>\n" +
                 "            </td>\n" +
                 "            <td>        \n" +
@@ -277,11 +277,24 @@ public class ParkhausWeb extends HttpServlet {
                 "                <form method=\"post\">\n" +
                 "                    <input type=\"submit\" style=\"background-color:lightgreen\" value=\"+10 Autos\" name=\"pull10\">\n" +
                 "                </form>\n" +
-                "            </td>"+
-                "        </tr>\n" +
+                "            </td>        \n" +
+                "            <td>\n" +
+                "                &nbsp;&nbsp;&nbsp;&nbsp;\n" +
+                "            </td>\n" +
+                "            <td>\n" +
+                "                <form method=\"post\">\n" +
+                "                    <input type=\"submit\" style=\"background-color:red\" value=\"reset\" name=\"inputreset\">\n" +
+                "                </form>\n" +
+                "            </td>\n" +
+                "            <td>\n" +
+                "                <form method=\"post\">\n" +
+                "                    <input type=\"submit\" style=\"background-color:red\" value=\"clear\" name=\"inputclear\">\n" +
+                "                </form>\n" +
+                "            </td>\n" +
+                "            </tr>\n" +
                 "    </tbody>\n" +
-                "</table>" +
-               // "</fieldset>" +
+                "</table>\n" +
+                "</fieldset>"+
                 "<br>\n" +
                 "<br>\n" +
                 "<br>\n"+

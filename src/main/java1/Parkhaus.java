@@ -54,11 +54,11 @@ public class Parkhaus implements ParkhausIF {
             preis = Math.round(preis*100.0)/100.0;
             log += "<tr>\n" +
                     "   <td>\n" +
-                    "<p class=\"color\"><red>"+list.get(i).getParkende()+" </red>\n" +
+                    "<p class=\"color\"><red>"+list.get(i).getParkende()+" </red></p>\n" +
                     "   </td>\n" +
                     "   <td>" + list.get(i).getId() + "</td>\n" +
                     "   <td>" + list.get(i).getParkende().subtract(list.get(i).getTimestamp()) + " min</td>\n" +
-                    "   <td>" + preis+"&#8364 </p></td>\n" +
+                    "   <td>" + preis+"&#8364;</td>\n" +
                     "</tr>\n";
             autoList.remove(list.get(i));
         }
