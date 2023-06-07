@@ -41,7 +41,14 @@ public class Parkhaus implements ParkhausIF {
     @Override
     public String push(Auto a1){
        double preis = a1.getParkende().subtract(a1.getTimestamp()) * this.tarif;
-       String log = "<p class=\"color\"><red>"+this.aktuelleZeit+": </red>Auto: " + a1.getId() + ", Dauer: " + a1.getParkende().subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€</p>\n";
+       String log = "<tr>\n" +
+               "   <td>\n" +
+               "<p class=\"color\"><red>"+a1.getParkende()+" </red></p>\n" +
+               "   </td>\n" +
+               "   <td>" + a1.getId() + "</td>\n" +
+               "   <td>" + a1.getParkende().subtract(a1.getTimestamp()) + " min</td>\n" +
+               "   <td>" + preis+"&#8364;</td>\n" +
+               "</tr>\n";
        autoList.remove(a1);
        this.log += log;
        return log;
