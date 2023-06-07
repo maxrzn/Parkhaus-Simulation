@@ -23,8 +23,12 @@ public class ParkhausWeb extends HttpServlet {
         this.inLog = "";
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
+        //TODO delete when error is fixed
+        PrintWriter out = response.getWriter();
+        out.print("hallo ich bin nicht so tod wie ihr denkt");
+
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -203,7 +207,7 @@ public class ParkhausWeb extends HttpServlet {
                 "</div>\n"
         );
         out.println("</body></html>");
-        out.flush();
+        //out.flush();
     }
 
     public void destroy() {
