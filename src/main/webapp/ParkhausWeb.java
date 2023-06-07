@@ -1,8 +1,6 @@
 package webapp;
 
 import java.io.*;
-import javax.servlet.Servlet;
-import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 
@@ -10,101 +8,38 @@ import java1.Auto;
 import java1.Parkhaus;
 import java1.Zeit;
 
-@WebServlet(name = "ParkhausWeb", value = "/ParkHausWeb")
+
+//TODO http://localhost:8080/Team_33_sose23_war/ParkHausWeb servlet bis jetzt nur hier aufrufbar
+@WebServlet(name = "ParkHausWeb", value = "/ParkHausWeb")
 public class ParkhausWeb extends HttpServlet {
-    private String message;
-    private String param;
-    private String command;
     private Parkhaus p;
     //private String log;
     private String inLog;
 
 
     public void init() {
-        message = "Parkhaus";
         p = new Parkhaus(10,0.01,new Zeit(4,4,2023,12,30));
         //log = "empty log";
         this.inLog = "";
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)  {
         response.setContentType("text/html");
-        /*boolean urlparamfound = false;
-        if(request.getQueryString() != null) {urlparamfound = true;}
-        if (urlparamfound) {
-            String[] requestParamString = request.getQueryString().split("=");
-            this.command = requestParamString[0];
-            this.param = requestParamString[1];
-        }*/
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        /* Hello
-
-        if(urlparamfound && request.getQueryString().split("=")[0].equals("name")){
-            this.message = "Hallo "+this.param;
-            out.println("<h1>" + "Hello" + " " + this.param + "</h1>");
-        } else {
-            out.println("<h1>"+this.message+"</h1>");
-        }*/
-        /*
-        out.println("<style type=\"text/css\">\n" +
-                "  td {\n" +
-                "    padding: 0 30px;\n" +
-                "  }\n" +
-                "</style>");
-
-         */
-        out.println("<br>\n" +
-                        "<b> aktuelle Zeit</b> " +
-                        "<table>\n" +
-                        "    <tr>\n" +
-                        "        <td>\n" +
-                        "           <form method=\"post\">\n" +
-                        //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
-                        "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
-                        "               <input type=\"submit\" value=\"Timewarp\">" +
-                        "           </form>\n" +
-                        "        </td>\n" +
-                        "        <td>\n" +
-                        "            <form method=\"post\">\n" +
-                        "            <input type=\"submit\" value=\"+15 min\" name=\"input15min\">\n" +
-                        "            </form>\n" +
-                        "        </td>\n" +
-                        "        <td>\n" +
-                        "            <form method=\"post\">\n" +
-                        "            <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
-                        "        </td>\n" +
-                        "    </tr>\n" +
-                        "   <tr>\n" +
-                        "       <td>\n" +
-                        "            <form method=\"post\">\n" +
-                        "               <input type=\"submit\" value=\"auto parken\" name=\"pull\">\n" +
-                        "       </td>\n" +
-                        "   </tr>\n" +
-                        "</table>\n" +
-                        "<table>\n" +
-                        "    <tr>\n" +
-                        "        <td>\n" +
-                        "<h4> Einfahrt Log </h4>" +
-                        "<p>" + this.inLog + "</p>" +
-                        "        </td>\n" +
-                        "       <td>\n" +
-                        "<h4>&nbsp;&nbsp;&nbsp; Ausfahrt Log </h4>" +
-                        "<p>" + p.getLog() + "</p>" +
-                        "       </td>\n" +
-                        "   </tr>\n" +
-                        "</table>\n"
-        );
-        out.println("</body></html>");
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
+
+        //TODO known bug: refresh direkt nach button press --> erneute formular übermittlung button ist noch !=null und führt funktion daher nochmal aus
 
         //Zeitsprung
         if(request.getParameter("inputzeitsprung") != null) {
             p.timewarp(request.getParameter("inputzeitsprung"));
+        }
+        //+1 min
+        if(request.getParameter("input1min") != null) {
+            p.timeskip(0,1);
         }
         //+15 min
         if(request.getParameter("input15min") != null){
@@ -114,65 +49,161 @@ public class ParkhausWeb extends HttpServlet {
         if(request.getParameter("input1h") != null) {
             p.timeskip(1,0);
         }
-        //pull
+        //+12h
+        if(request.getParameter("input12h") != null) {
+            p.timeskip(12,0);
+        }
+        // pull
         if(request.getParameter("pull") != null) {
             Auto a = p.pull();
-            this.inLog += "&nbsp;&nbsp;&nbsp;Kennzeichen: " + a.getId() + " Timestamp: " + p.getAktuelleZeit()+ "\n<br>";
+            this.inLog +="<tr>\n" +
+                    "   <td>\n" +
+                    "       <p class=\"color\"> <red>" + p.getAktuelleZeit() + " </red></p>\n" +
+                    "   </td>\n" +
+                    "   <td>\n" +
+                    "       <p>" + a.getId() + "</p>\n" +
+                    "   </td>\n" +
+                    "</tr>\n";
+        }
+        //pull10
+        if(request.getParameter("pull10") != null) {
+            for(int i=0; i<10; i++){
+                Auto a = p.pull();
+                this.inLog +="<tr>\n" +
+                        "   <td>\n" +
+                        "       <p class=\"color\"> <red>" + p.getAktuelleZeit() + " </red></p>\n" +
+                        "   </td>\n" +
+                        "   <td>\n" +
+                        "       <p>" + a.getId() + "</p>\n" +
+                        "   </td>\n" +
+                        "</tr>\n";
+            }
         }
 
-
-        //request.setAttribute("inputzeitsprung",p.getAktuelleZeit().toString());
-        //this.zahl2 = Integer.parseInt(request.getParameter("input15min"));
-        out.println("<html><body> ");
-        /*out.println("<style type=\"text/css\">\n" +
-                "  td {\n" +
-                "    padding: 0 30px;\n" +
-                "  }\n" +
+        //main output
+        out.println("<html>" +
+                "<body>" +
+                "<style type=\"text/css\">\n" +
+                "table.tb, .tb tr:first-child td {\n" +
+                "  border: solid black;\n" +
+                "  border-collapse: collapse;\n" +
+                "}\n" +
+                ".tb td { border: 1px solid black;" +
+                "         padding: 5px;}\n" +
+                "div.wrap {\n" +
+                "  width: 25%;\n" +
+                "  float: left;\n" +
+                "  margin: 0px;\n" +
+                "}\n" +
+                "p.color {\n" +
+                "  color: #0d0100;\n" +
+                "}\n" +
+                "\n" +
+                ".color red {\n" +
+                "  color: #ed4d47;\n" +
+                "}" +
                 "</style>");
 
-         */
-        out.println("<br>\n" +
-                "<b> aktuelle Zeit</b> " +
-                "<table>\n" +
-                "    <tr>\n" +
-                "        <td>\n" +
-                "           <form method=\"post\">\n" +
-                //"             <input type=\"hidden\" name=\"aktion\" value=\"timewarp\">\n" +
-                "               <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
-                "               <input type=\"submit\" value=\"Timewarp\">" +
-                "           </form>\n" +
-                "        </td>\n" +
-                "        <td>\n" +
-                "            <form method=\"post\">\n" +
-                "            <input type=\"submit\" value=\"+15 min\" name=\"input15min\">\n" +
+        out.println(
+               // "<fieldset>" +
+              //  "   <legend> <h3> Environmental Settings </h3> </legend>" +
+                "<table style =\"border:1px solid black;\" >\n" +
+                "    <thead>\n" +
+                "        <tr>\n" +
+                "        <th colspan=\"5\" align=\"center\"><b> Zeiteinstellungen </b> </th>\n" +
+                "        <th>&nbsp;</th>\n" +
+                "        <th colspan=\"2\"> Autos </th>\n" +
+                "    </thead>\n"+
+                "    <tbody>\n" +
+                "        <tr>\n" +
+                "            <td>\n" +
+                "                <form method=\"post\">\n" +
+                "                <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
+                "                </form>\n" +
+                "            </td>\n" +
+                "            <td>        \n" +
+                "                <form method=\"post\">\n" +
+                "                <input type=\"submit\" value=\"+1 min\" name=\"input1min\"> \n" +
+                "        </form>        \n" +
+                "            </td>\n" +
+                "            <td>\n" +
+                "                <form method=\"post\">\n" +
+                "                <input type=\"submit\" value=\"+15 min\" name=\"input15min\">\n" +
                 "            </form>\n" +
-                "        </td>\n" +
-                "        <td>\n" +
-                "            <form method=\"post\">\n" +
-                "            <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
-                "        </td>\n" +
-                "    </tr>\n" +
-                "   <tr>\n" +
-                "       <td>\n" +
-                "            <form method=\"post\">\n" +
-                "               <input type=\"submit\" value=\"auto parken\" name=\"pull\">\n" +
-                "       </td>\n" +
-                "   </tr>\n" +
-                "</table>\n" +
-                "<table>\n" +
+                "            </td>\n" +
+                "            <td>\n" +
+                "                <form method=\"post\">\n" +
+                "                <input type=\"submit\" value=\"+1 h\" name=\"input1h\">\n" +
+                "                </form>\n" +
+                "            </td>\n" +
+                "            <td>           \n" +
+                "                <form method=\"post\">\n" +
+                "                <input type=\"submit\" value=\"+12 h\" name=\"input12h\">\n" +
+                "               </form>\n" +
+                "            </td>\n" +
+                "            <td>\n" +
+                "                &nbsp;&nbsp;&nbsp;&nbsp;\n" +
+                "            </td>\n" +
+                "            <td align=\"left\">\n" +
+                "                <form method=\"post\">\n" +
+                "                    <input type=\"submit\" style=\"background-color:lightgreen\" value=\"+1 Auto\" name=\"pull\">\n" +
+                "                </form>\n" +
+                "            </td>\n" +
+                "            <td>\n" +
+                "                <form method=\"post\">\n" +
+                "                    <input type=\"submit\" style=\"background-color:lightgreen\" value=\"+10 Autos\" name=\"pull10\">\n" +
+                "                </form>\n" +
+                "            </td>"+
+                "        </tr>\n" +
+                "    </tbody>\n" +
+                "</table>" +
+               // "</fieldset>" +
+                "<br>\n" +
+                "<br>\n" +
+                "<br>\n"+
+                "<div class=\"wrap\">\n" +
+                "<table class=\"tb\">\n" +
+                "    <thead>\n" +
+                "        <tr>\n" +
+                "            <th align=\"center\" colspan=\"2\"> Einfahrt Log </th> \n" +
+                "        </tr>\n" +
+                "    </thead>\n" +
+                "<tbody>\n" +
                 "    <tr>\n" +
-                "        <td>\n" +
-                "<h4> Einfahrt Log </h4>" +
-                "<p>" + this.inLog + "</p>" +
-                "        </td>\n" +
-                "       <td>\n" +
-                "<h4>&nbsp;&nbsp;&nbsp; Ausfahrt Log </h4>" +
-                "<p>" + p.getLog() + "</p>" +
-                "       </td>\n" +
-                "   </tr>\n" +
-                "</table>\n"
+                "        <td align=\"center\">Zeit </td>\n" +
+                "        <td align=\"center\">Kennzeichen</td>\n" +
+                "    </tr> " +
+                this.inLog +
+                "</tbody>" +
+                "</table>\n" +
+                "</div>\n" +
+                "<div class=\"wrap\">\n" +
+                "<table class=\"tb\">\n" +
+                "    <tr>\n" +
+                "<th align=\"center\" colspan=\"4\"> Ausfahrt Log </th>" +
+                "    </tr>\n" +
+                "<tbody>\n" +
+                "<tr>" +
+                "<td align=\"center\">" +
+                "Zeit" +
+                "</td>" +
+                "<td align=\"center\">" +
+                "Kennzeichen" +
+                "</td>" +
+                "<td align=\"center\">" +
+                "Dauer" +
+                "</td>" +
+                "<td align=\"center\">" +
+                "Preis" +
+                "</td>" +
+                "</tr>" +
+                p.getLog() +
+                "</tbody>\n" +
+                "</table>\n" +
+                "</div>\n"
         );
         out.println("</body></html>");
+        out.flush();
     }
 
     public void destroy() {

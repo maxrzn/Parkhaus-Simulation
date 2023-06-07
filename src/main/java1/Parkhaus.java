@@ -41,7 +41,7 @@ public class Parkhaus implements ParkhausIF {
     @Override
     public String push(Auto a1){
        double preis = a1.getParkende().subtract(a1.getTimestamp()) * this.tarif;
-       String log = "Auto: " + a1.getId() + ", Dauer: " + a1.getParkende().subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€\n";
+       String log = "<p class=\"color\"><red>"+this.aktuelleZeit+": </red>Auto: " + a1.getId() + ", Dauer: " + a1.getParkende().subtract(a1.getTimestamp()) + "min, Preis: " + preis+"€</p>\n";
        autoList.remove(a1);
        this.log += log;
        return log;
@@ -52,7 +52,14 @@ public class Parkhaus implements ParkhausIF {
         for(int i=0; i<list.size();i++){
             double preis = list.get(i).getParkende().subtract(list.get(i).getTimestamp()) * this.tarif;
             preis = Math.round(preis*100.0)/100.0;
-            log += "Kennzeichen: " + list.get(i).getId() + ", Dauer: " + list.get(i).getParkende().subtract(list.get(i).getTimestamp()) + " min, Preis: " + preis+"&#8364\n <br>";
+            log += "<tr>\n" +
+                    "   <td>\n" +
+                    "<p class=\"color\"><red>"+list.get(i).getParkende()+" </red>\n" +
+                    "   </td>\n" +
+                    "   <td>" + list.get(i).getId() + "</td>\n" +
+                    "   <td>" + list.get(i).getParkende().subtract(list.get(i).getTimestamp()) + " min</td>\n" +
+                    "   <td>" + preis+"&#8364 </p></td>\n" +
+                    "</tr>\n";
             autoList.remove(list.get(i));
         }
         this.log += log;
