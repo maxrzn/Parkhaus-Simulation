@@ -103,11 +103,11 @@ public class ParkhausWeb extends HttpServlet {
                         "            </td>\n" +
                         "            <td>\n" +
                         "                <form method=\"post\">\n" +
-                        "                    <input type=\"text\" placeholder=\"Größe\" name=\"inputsize\">\n" +
+                        "                    <input type=\"text\" placeholder=\"Kapazität\" name=\"inputsize\">\n" +
                         "        \n" +
                         "                    <input type=\"text\" placeholder=\"Tarif in &#8364; p. min.\" name=\"inputtarif\">\n" +
                         "            \n" +
-                        "                    <input type=\"text\" placeholder=\"DD.MM.YYY, hh:mm\" name=\"inputtime\">\n" +
+                        "                    <input type=\"text\" placeholder=\"dd.MM.yyyy, KK:mm\" name=\"inputtime\">\n" +
                         "                    <input type=\"submit\" name=\"inputparkhaus\" value=\"new Parkhaus\">\n" +
                         "                </form>\n" +
                         "            </td>\n" +
@@ -287,11 +287,11 @@ public class ParkhausWeb extends HttpServlet {
                 "            </td>\n" +
                 "            <td>\n" +
                 "                <form method=\"post\">\n" +
-                "                    <input type=\"text\" placeholder=\"Größe\" name=\"inputsize\">\n" +
+                "                    <input type=\"text\" placeholder=\"Kapazität\" name=\"inputsize\">\n" +
                 "        \n" +
                 "                    <input type=\"text\" placeholder=\"Tarif in &#8364; p. min.\" name=\"inputtarif\">\n" +
                 "            \n" +
-                "                    <input type=\"text\" placeholder=\"DD.MM.YYY, hh:mm\" name=\"inputtime\">\n" +
+                "                    <input type=\"text\" placeholder=\"dd.MM.yyyy, KK:mm\" name=\"inputtime\">\n" +
                 "                    <input type=\"submit\" name=\"inputparkhaus\" value=\"new Parkhaus\">\n" +
                 "                </form>\n" +
                 "            </td>\n" +
