@@ -157,28 +157,20 @@ public class ParkhausWeb extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out = response.getWriter();
         //TODO known bug: refresh direkt nach button press --> erneute formular übermittlung button ist noch !=null und führt funktion daher nochmal aus
-        //Zeitsprung
-        if(request.getParameter("inputzeitsprung") != null) {
+
+
+        if(request.getParameter("inputzeitsprung") != null) {               //Zeitsprung (ist immer != null deswegen nur if, glaub ich)
             p.timewarp(request.getParameter("inputzeitsprung"));
         }
-        //+1 min
-        if(request.getParameter("input1min") != null) {
+        if(request.getParameter("input1min") != null) {                     //+1 min
             p.timeskip(0,1);
-        }
-        //+15 min
-        if(request.getParameter("input15min") != null){
+        } else if(request.getParameter("input15min") != null){              //+15 min
             p.timeskip(0,15);
-        }
-        //+1h
-        if(request.getParameter("input1h") != null) {
+        } else if(request.getParameter("input1h") != null) {                //+1h
             p.timeskip(1,0);
-        }
-        //+12h
-        if(request.getParameter("input12h") != null) {
+        } else if(request.getParameter("input12h") != null) {               //+12h
             p.timeskip(12,0);
-        }
-        // pull
-        if(request.getParameter("pull") != null) {
+        } else if(request.getParameter("pull") != null) {                   // pull
             Auto a = p.pull();
             this.inLog +="<tr>\n" +
                     "   <td>\n" +
@@ -188,9 +180,7 @@ public class ParkhausWeb extends HttpServlet {
                     "       <p>" + a.getId() + "</p>\n" +
                     "   </td>\n" +
                     "</tr>\n";
-        }
-        //pull10
-        if(request.getParameter("pull10") != null) {
+        } else if(request.getParameter("pull10") != null) {                 //pull10
             for(int i=0; i<10; i++){
                 Auto a = p.pull();
                 this.inLog +="<tr>\n" +
@@ -203,6 +193,8 @@ public class ParkhausWeb extends HttpServlet {
                         "</tr>\n";
             }
         }
+
+
 
         //main output
         out.println("<html>" +
@@ -229,7 +221,8 @@ public class ParkhausWeb extends HttpServlet {
                 "</style>");
 
         out.println(
-                "<fieldset>   <legend> <h3> Environmental Settings </h3> </legend><table style =\"border:1px solid black;\" >\n" +
+                "<fieldset>\n" +
+                "   <legend> <h3> Environmental Settings </h3> </legend><table style =\"border:1px solid black;\" >\n" +
                 "    <thead>\n" +
                 "        <tr>\n" +
                 "        <th colspan=\"5\" align=\"center\"><b> Zeiteinstellungen </b> </th>\n" +
@@ -242,7 +235,7 @@ public class ParkhausWeb extends HttpServlet {
                 "        <tr>\n" +
                 "            <td>\n" +
                 "                <form method=\"post\">\n" +
-                "                <input type=\"/text\" name=\"inputzeitsprung\" value=\"05.04.2023, 13:30\">\n" +
+                "                <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit()+"\">\n" +
                 "                </form>\n" +
                 "            </td>\n" +
                 "            <td>        \n" +
@@ -266,7 +259,7 @@ public class ParkhausWeb extends HttpServlet {
                 "               </form>\n" +
                 "            </td>\n" +
                 "            <td>\n" +
-                "                &nbsp;&nbsp;&nbsp;&nbsp;\n" +
+                "                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n" +
                 "            </td>\n" +
                 "            <td align=\"left\">\n" +
                 "                <form method=\"post\">\n" +
@@ -279,22 +272,27 @@ public class ParkhausWeb extends HttpServlet {
                 "                </form>\n" +
                 "            </td>        \n" +
                 "            <td>\n" +
-                "                &nbsp;&nbsp;&nbsp;&nbsp;\n" +
+                "                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n" +
                 "            </td>\n" +
                 "            <td>\n" +
-                "                <form method=\"post\">\n" +
-                "                    <input type=\"submit\" style=\"background-color:red\" value=\"reset\" name=\"inputreset\">\n" +
+                "                <form action=\"post\">\n" +
+                "                    <input type=\"text\" placeholder=\"Größe\" name=\"inputsize\">\n" +
+                "        \n" +
+                "                    <input type=\"text\" placeholder=\"Tarif in &#8364; p. min.\" name=\"inputtarif\">\n" +
+                "            \n" +
+                "                    <input type=\"text\" placeholder=\"DD.MM.YYY, hh:mm\" name=\"inputtime\">\n" +
+                "                    <input type=\"submit\" name=\"inputparkhaus\" value=\"new Parkhaus\">\n" +
                 "                </form>\n" +
                 "            </td>\n" +
-                "            <td>\n" +
+                "             <td>\n" +
                 "                <form method=\"post\">\n" +
-                "                    <input type=\"submit\" style=\"background-color:red\" value=\"clear\" name=\"inputclear\">\n" +
+                "                    <input type=\"submit\" style=\"background-color:red\" value=\"reset\" name=\"inputreset\">\n" +
                 "                </form>\n" +
                 "            </td>\n" +
                 "            </tr>\n" +
                 "    </tbody>\n" +
                 "</table>\n" +
-                "</fieldset>"+
+                "</fieldset>\n"+
                 "<br>\n" +
                 "<br>\n" +
                 "<br>\n"+
