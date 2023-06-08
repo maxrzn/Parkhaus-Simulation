@@ -8,7 +8,8 @@ public class Parkhaus implements ParkhausIF {
     private Zeit aktuelleZeit;
     private double tarif;
     private ArrayList<Auto> autoList = new ArrayList<Auto>();
-    private String log;
+    private String inlog;
+    private String outlog;
 
     /**
      * konstruktor
@@ -19,13 +20,15 @@ public class Parkhaus implements ParkhausIF {
         autoList = new ArrayList<Auto>(size);
         aktuelleZeit = new Zeit();
         this.tarif = tarif;
-        this.log = "";
+        this.outlog = "";
+        this.inlog ="";
     }
     public Parkhaus(int size, double tarif, Zeit z1){
         autoList = new ArrayList<Auto>(size);
         this.tarif = tarif;
         aktuelleZeit = z1;
-        this.log = "";
+        this.outlog = "";
+        this.inlog ="";
     }
     /**
      * erstellt ein auto(id,zeit), fügt es zu autoList hinzu
@@ -34,6 +37,16 @@ public class Parkhaus implements ParkhausIF {
    @Override
     public Auto pull() {
        Auto tmp = new Auto(Auto.getCounter()+1, aktuelleZeit);
+
+       this.inlog +="<tr>\n" +
+               "   <td>\n" +
+               "       <p class=\"color\"> <red>" + this.aktuelleZeit + " </red></p>\n" +
+               "   </td>\n" +
+               "   <td>\n" +
+               "       <p>" + tmp.getId() + "</p>\n" +
+               "   </td>\n" +
+               "</tr>\n";
+
        autoList.add(tmp);
        return tmp;
     }
@@ -41,7 +54,7 @@ public class Parkhaus implements ParkhausIF {
     @Override
     public String push(Auto a1){
        double preis = a1.getParkende().subtract(a1.getTimestamp()) * this.tarif;
-       String log = "<tr>\n" +
+       String outlogtmp = "<tr>\n" +
                "   <td>\n" +
                "<p class=\"color\"><red>"+a1.getParkende()+" </red></p>\n" +
                "   </td>\n" +
@@ -50,16 +63,15 @@ public class Parkhaus implements ParkhausIF {
                "   <td>" + preis+"&#8364;</td>\n" +
                "</tr>\n";
        autoList.remove(a1);
-       this.log += log;
-       return log;
+       this.outlog += outlogtmp;
+       return outlogtmp;
     }
     public String push(List<Auto> list){
-       //TODO bisschen getested
-        String log = "";
+        String outlogtmp = "";
         for(int i=0; i<list.size();i++){
             double preis = list.get(i).getParkende().subtract(list.get(i).getTimestamp()) * this.tarif;
             preis = Math.round(preis*100.0)/100.0;
-            log += "<tr>\n" +
+            outlogtmp += "<tr>\n" +
                     "   <td>\n" +
                     "<p class=\"color\"><red>"+list.get(i).getParkende()+" </red></p>\n" +
                     "   </td>\n" +
@@ -69,8 +81,8 @@ public class Parkhaus implements ParkhausIF {
                     "</tr>\n";
             autoList.remove(list.get(i));
         }
-        this.log += log;
-        return log;
+        this.outlog += outlogtmp;
+        return outlogtmp;
     }
     public void timewarp(String timestamp){
      aktuelleZeit.setTime(timestamp);
@@ -84,24 +96,15 @@ public class Parkhaus implements ParkhausIF {
     * prüft ob die Parkzeit eines Autos abgelaufen ist und ruft push(i) auf
     */
     public void checkparktime() {
-        //TODO funktioniert auf den ersten Blick und tests aber nochmal prüfen bevor alten code löschen
-        //ArrayList<Auto> tmp = new ArrayList<Auto>(this.autoList);
         List<Auto> ltmp = this.autoList
                 .stream()
                 .filter(auto -> auto.getParkende().compareTo(this.aktuelleZeit) <= 0)
                 .toList();
         push(ltmp);
-        /*
-        for(int i=0; i<tmp.size(); i++) {
-            if (tmp.get(i) != null) {
-                if(tmp.get(i).getParkende().compareTo(this.aktuelleZeit) <= 0){
-                    push(tmp.get(i));
-                }
-            }
-        }*/
     }
 
     public ArrayList<Auto> getAutoList(){return this.autoList;}
     public Zeit getAktuelleZeit(){return this.aktuelleZeit;}
-    public String getLog(){return this.log;}
+    public String getOutlog(){return this.outlog;}
+    public String getInlog(){return this.inlog;}
 }

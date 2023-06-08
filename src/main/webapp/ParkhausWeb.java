@@ -13,14 +13,10 @@ import java1.Zeit;
 @WebServlet(name = "ParkHausWeb", value = "/ParkHausWeb")
 public class ParkhausWeb extends HttpServlet {
     private Parkhaus p;
-    //private String log;
-    private String inLog;
 
-
+    //TODO parkhaus kapazität durchsetzen
     public void init() {
-        p = new Parkhaus(10,0.01,new Zeit(4,4,2023,12,30));
-        //log = "empty log";
-        this.inLog = "";
+        p = new Parkhaus(100,0.01,new Zeit(4,4,2023,12,30));
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -52,20 +48,21 @@ public class ParkhausWeb extends HttpServlet {
                 "</style>");
 
         out.println(
-                // "<fieldset>" +
-                //  "   <legend> <h3> Environmental Settings </h3> </legend>" +
-                "<table style =\"border:1px solid black;\" >\n" +
+                "<fieldset>\n" +
+                        "   <legend> <h3> Environmental Settings </h3> </legend><table style =\"border:1px solid black;\" >\n" +
                         "    <thead>\n" +
                         "        <tr>\n" +
                         "        <th colspan=\"5\" align=\"center\"><b> Zeiteinstellungen </b> </th>\n" +
                         "        <th>&nbsp;</th>\n" +
                         "        <th colspan=\"2\"> Autos </th>\n" +
-                        "    </thead>\n"+
+                        "        <th>&nbsp;</th>\n" +
+                        "        <th colspan=\"2\" align=\"center\"> Parkhaus </th>\n" +
+                        "    </thead>\n" +
                         "    <tbody>\n" +
                         "        <tr>\n" +
                         "            <td>\n" +
                         "                <form method=\"post\">\n" +
-                        "                <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit().toString()+"\">\n" +
+                        "                <input type=\"/text\" name=\"inputzeitsprung\" value=\""+p.getAktuelleZeit()+"\">\n" +
                         "                </form>\n" +
                         "            </td>\n" +
                         "            <td>        \n" +
@@ -89,7 +86,7 @@ public class ParkhausWeb extends HttpServlet {
                         "               </form>\n" +
                         "            </td>\n" +
                         "            <td>\n" +
-                        "                &nbsp;&nbsp;&nbsp;&nbsp;\n" +
+                        "                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n" +
                         "            </td>\n" +
                         "            <td align=\"left\">\n" +
                         "                <form method=\"post\">\n" +
@@ -100,11 +97,29 @@ public class ParkhausWeb extends HttpServlet {
                         "                <form method=\"post\">\n" +
                         "                    <input type=\"submit\" style=\"background-color:lightgreen\" value=\"+10 Autos\" name=\"pull10\">\n" +
                         "                </form>\n" +
-                        "            </td>"+
-                        "        </tr>\n" +
+                        "            </td>        \n" +
+                        "            <td>\n" +
+                        "                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n" +
+                        "            </td>\n" +
+                        "            <td>\n" +
+                        "                <form method=\"post\">\n" +
+                        "                    <input type=\"text\" placeholder=\"Größe\" name=\"inputsize\">\n" +
+                        "        \n" +
+                        "                    <input type=\"text\" placeholder=\"Tarif in &#8364; p. min.\" name=\"inputtarif\">\n" +
+                        "            \n" +
+                        "                    <input type=\"text\" placeholder=\"DD.MM.YYY, hh:mm\" name=\"inputtime\">\n" +
+                        "                    <input type=\"submit\" name=\"inputparkhaus\" value=\"new Parkhaus\">\n" +
+                        "                </form>\n" +
+                        "            </td>\n" +
+                        "             <td>\n" +
+                        "                <form method=\"post\">\n" +
+                        "                    <input type=\"submit\" style=\"background-color:red\" value=\"reset\" name=\"inputreset\">\n" +
+                        "                </form>\n" +
+                        "            </td>\n" +
+                        "            </tr>\n" +
                         "    </tbody>\n" +
-                        "</table>" +
-                        // "</fieldset>" +
+                        "</table>\n" +
+                        "</fieldset>\n"+
                         "<br>\n" +
                         "<br>\n" +
                         "<br>\n"+
@@ -120,7 +135,7 @@ public class ParkhausWeb extends HttpServlet {
                         "        <td align=\"center\">Zeit </td>\n" +
                         "        <td align=\"center\">Kennzeichen</td>\n" +
                         "    </tr> " +
-                        this.inLog +
+                        p.getInlog() +
                         "</tbody>" +
                         "</table>\n" +
                         "</div>\n" +
@@ -144,12 +159,13 @@ public class ParkhausWeb extends HttpServlet {
                         "Preis" +
                         "</td>" +
                         "</tr>" +
-                        p.getLog() +
+                        p.getOutlog() +
                         "</tbody>\n" +
                         "</table>\n" +
                         "</div>\n"
         );
         out.println("</body></html>");
+        //out.flush();
 
     }
 
@@ -172,28 +188,23 @@ public class ParkhausWeb extends HttpServlet {
             p.timeskip(12,0);
         } else if(request.getParameter("pull") != null) {                   // pull
             Auto a = p.pull();
-            this.inLog +="<tr>\n" +
-                    "   <td>\n" +
-                    "       <p class=\"color\"> <red>" + p.getAktuelleZeit() + " </red></p>\n" +
-                    "   </td>\n" +
-                    "   <td>\n" +
-                    "       <p>" + a.getId() + "</p>\n" +
-                    "   </td>\n" +
-                    "</tr>\n";
         } else if(request.getParameter("pull10") != null) {                 //pull10
             for(int i=0; i<10; i++){
                 Auto a = p.pull();
-                this.inLog +="<tr>\n" +
-                        "   <td>\n" +
-                        "       <p class=\"color\"> <red>" + p.getAktuelleZeit() + " </red></p>\n" +
-                        "   </td>\n" +
-                        "   <td>\n" +
-                        "       <p>" + a.getId() + "</p>\n" +
-                        "   </td>\n" +
-                        "</tr>\n";
             }
-        }
+        } else if(request.getParameter("inputparkhaus") != null) {          //new parkhaus
+            int size = 100 ;
+            double tarif = 0.01;
+            Zeit zeit1 = new Zeit(4,4,2023,12,30);
 
+            if(request.getParameter("inputsize") != "") {size = Integer.parseInt(request.getParameter("inputsize"));}
+            if(request.getParameter("inputtarif") != "") {tarif = Double.parseDouble(request.getParameter("inputtarif"));}
+            if(request.getParameter("inputtime") != "") {zeit1.setTime(request.getParameter("inputtime"));}
+
+            this.p = new Parkhaus(size,tarif,zeit1);
+        } else if(request.getParameter("inputreset") != null) {             //reset (macht das gleiche wie new parkaus ohne parameter)
+            this.p = new Parkhaus(100,0.01,new Zeit(4,4,2023,12,30));
+        }
 
 
         //main output
@@ -275,7 +286,7 @@ public class ParkhausWeb extends HttpServlet {
                 "                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n" +
                 "            </td>\n" +
                 "            <td>\n" +
-                "                <form action=\"post\">\n" +
+                "                <form method=\"post\">\n" +
                 "                    <input type=\"text\" placeholder=\"Größe\" name=\"inputsize\">\n" +
                 "        \n" +
                 "                    <input type=\"text\" placeholder=\"Tarif in &#8364; p. min.\" name=\"inputtarif\">\n" +
@@ -308,7 +319,7 @@ public class ParkhausWeb extends HttpServlet {
                 "        <td align=\"center\">Zeit </td>\n" +
                 "        <td align=\"center\">Kennzeichen</td>\n" +
                 "    </tr> " +
-                this.inLog +
+                p.getInlog() +
                 "</tbody>" +
                 "</table>\n" +
                 "</div>\n" +
@@ -332,7 +343,7 @@ public class ParkhausWeb extends HttpServlet {
                 "Preis" +
                 "</td>" +
                 "</tr>" +
-                p.getLog() +
+                p.getOutlog() +
                 "</tbody>\n" +
                 "</table>\n" +
                 "</div>\n"
