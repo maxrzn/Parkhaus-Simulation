@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +43,7 @@
     </style>
 </head>
 <body>
+<p style="background-color:white; font-size:20px; color:black;"> Achtung! Vorm Parkhaus Eingang steht ein fremder Mann der sie nicht durchlässt und ihnen Fast & Furious 9 verkaufen will. Ein Eis könnte ihn vielleicht umstimmen...</p>
 <br><br><br><br>
 <h1>
     現在我有冰淇淋
