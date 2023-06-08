@@ -1,6 +1,7 @@
 package java1;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import java1.Auto;
 public class Parkhaus implements ParkhausIF {
@@ -99,7 +100,7 @@ public class Parkhaus implements ParkhausIF {
         List<Auto> ltmp = this.autoList
                 .stream()
                 .filter(auto -> auto.getParkende().compareTo(this.aktuelleZeit) <= 0)
-                .toList();
+                .collect(Collectors.toList());
         push(ltmp);
     }
 
