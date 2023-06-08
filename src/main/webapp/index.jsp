@@ -1,8 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,7 +58,9 @@
 </script>-->
 
 <p class="blink" id="achtung" style="background-color:white; font-size:20px; color:black;"> Achtung!!! <br>Vorm Parkhaus Eingang steht ein fremder Mann der sie nicht durchlässt und ihnen Fast & Furious 9 verkaufen will.<br> Ein Eis könnte ihn vielleicht umstimmen...</p>
-<br><br>
+
+<iframe frameborder="1" width="20" height="20" allow="autoplay" src="https://www.youtube.com/embed/sxT5bnowzcU?autoplay=0" title="YouTube video player"></iframe>
+
 <h1>
     現在我有冰淇淋
     我很喜歡冰淇淋
@@ -108,9 +107,7 @@
                 &nbsp;&nbsp;&nbsp;
             </td>
             <td>
-                <iframe scrolling="no" width="110" height="125" src="https://www.voicy.network/embed/rfyYCc3t6EWCnwAtJAsE9Q"></iframe><br>
-                <a href="ParkHausWeb">BING CHILLING</a>
-
+                <a align="top" href="ParkHausWeb">BING CHILLING</a>
             </td>
             <td>
                 &nbsp;&nbsp;&nbsp;
