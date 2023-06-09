@@ -8,9 +8,11 @@ public class Parkhaus implements ParkhausIF {
 
     private Zeit aktuelleZeit;
     private double tarif;
+    private int size;
     private ArrayList<Auto> autoList = new ArrayList<Auto>();
     private String inlog;
     private String outlog;
+
 
     /**
      * konstruktor
@@ -21,12 +23,14 @@ public class Parkhaus implements ParkhausIF {
         autoList = new ArrayList<Auto>(size);
         aktuelleZeit = new Zeit();
         this.tarif = tarif;
+        this.size = size;
         this.outlog = "";
         this.inlog ="";
     }
     public Parkhaus(int size, double tarif, Zeit z1){
         autoList = new ArrayList<Auto>(size);
         this.tarif = tarif;
+        this.size = size;
         aktuelleZeit = z1;
         this.outlog = "";
         this.inlog ="";
@@ -108,4 +112,6 @@ public class Parkhaus implements ParkhausIF {
     public Zeit getAktuelleZeit(){return this.aktuelleZeit;}
     public String getOutlog(){return this.outlog;}
     public String getInlog(){return this.inlog;}
+    public int getSize(){return this.size;}
+    public double getTarif(){return this.tarif;}
 }
