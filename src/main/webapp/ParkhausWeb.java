@@ -277,6 +277,8 @@ public class ParkhausWeb extends HttpServlet {
                         "</tr>\n";
             }
             this.park = tmp;
+        }else {
+            this.park = "";
         }
 
 
@@ -291,7 +293,7 @@ public class ParkhausWeb extends HttpServlet {
                 ".tb td { border: 1px solid black;" +
                 "         padding: 5px;}\n" +
                 "div.wrap {\n" +
-                "  width: 25%;\n" +
+                "  width: 30%;\n" +
                 "  float: left;\n" +
                 "  margin: 0px;\n" +
                 "}\n" +
@@ -410,10 +412,10 @@ public class ParkhausWeb extends HttpServlet {
                         "                <b>"+(p.getSize()-p.getAutoList().size())+"</b>\n" +
                         "            </td>\n" +
                         "            <td align=\"right\">\n" +
-                        "                beispiel: \n" +
+                        "                Einnahmen: \n" +
                         "            </td>\n" +
                         "            <td align=\"left\">\n" +
-                        "                <b>00</b>\n" +
+                        "                <b>" + p.getEinnahmen() + "</b>\n" +
                         "            </td>\n" +
                         "        </tr>\n" +
                         "    </table>" +
@@ -421,7 +423,7 @@ public class ParkhausWeb extends HttpServlet {
                         "<br>\n" +
                         "<br>\n"+
                         "<div class=\"wrap\">\n" +
-                        "<table class=\"tb\" style=\"margin-left:200px\">\n" +
+                        "<table class=\"tb\" style=\"margin-left:100px\">\n" +
                         "    <thead>\n" +
                         "        <tr>\n" +
                         "            <th align=\"center\" colspan=\"2\"> Einfahrt Log </th> \n" +
@@ -437,7 +439,7 @@ public class ParkhausWeb extends HttpServlet {
                         "</table>\n" +
                         "</div>\n" +
                         "<div class=\"wrap\">\n" +
-                        "    <table class=\"tb\" style=\"margin-left:300px\">\n" +
+                        "    <table class=\"tb\" style=\"margin-left:150px\">\n" +
                         "        <thead>\n" +
                         "            <tr>\n" +
                         "                <th align=\"center\" colspan=\"\"> Parkhaus </th>\n" +
@@ -454,7 +456,7 @@ public class ParkhausWeb extends HttpServlet {
                         "    </table>\n" +
                         "</div>" +
                         "<div class=\"wrap\">\n" +
-                        "<table class=\"tb\" style=\"margin-left:350px\">\n" +
+                        "<table class=\"tb\" style=\"margin-left:250px\">\n" +
                         "    <tr>\n" +
                         "<th align=\"center\" colspan=\"4\"> Ausfahrt Log </th>" +
                         "    </tr>\n" +

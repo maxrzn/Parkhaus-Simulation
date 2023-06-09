@@ -12,6 +12,7 @@ public class Parkhaus implements ParkhausIF {
     private ArrayList<Auto> autoList = new ArrayList<Auto>();
     private String inlog;
     private String outlog;
+    private double einnahmen;
 
 
     /**
@@ -26,6 +27,7 @@ public class Parkhaus implements ParkhausIF {
         this.size = size;
         this.outlog = "";
         this.inlog ="";
+        this.einnahmen = 0d;
     }
     public Parkhaus(int size, double tarif, Zeit z1){
         autoList = new ArrayList<Auto>(size);
@@ -34,6 +36,7 @@ public class Parkhaus implements ParkhausIF {
         aktuelleZeit = z1;
         this.outlog = "";
         this.inlog ="";
+        this.einnahmen = 0d;
     }
     /**
      * erstellt ein auto(id,zeit), fügt es zu autoList hinzu
@@ -69,6 +72,7 @@ public class Parkhaus implements ParkhausIF {
                "</tr>\n";
        autoList.remove(a1);
        this.outlog += outlogtmp;
+       this.einnahmen += preis;
        return outlogtmp;
     }
     public String push(List<Auto> list){
@@ -85,6 +89,7 @@ public class Parkhaus implements ParkhausIF {
                     "   <td>" + preis+"&#8364;</td>\n" +
                     "</tr>\n";
             autoList.remove(list.get(i));
+            this.einnahmen += preis;
         }
         this.outlog += outlogtmp;
         return outlogtmp;
@@ -114,4 +119,5 @@ public class Parkhaus implements ParkhausIF {
     public String getInlog(){return this.inlog;}
     public int getSize(){return this.size;}
     public double getTarif(){return this.tarif;}
+    public double getEinnahmen(){return this.einnahmen;}
 }
